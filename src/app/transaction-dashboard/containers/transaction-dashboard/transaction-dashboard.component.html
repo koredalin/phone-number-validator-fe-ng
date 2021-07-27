@@ -1,0 +1,14 @@
+<h3>Transaction dashboard container</h3>
+
+<div class="app">
+    <div *ngFor="let transaction of transactions;">
+        {{ transaction.email }}
+    </div>
+
+    <transaction-detail
+        *ngFor="let transaction of transactions;"
+        [detail]="transaction"
+        (view)="handleView($event)">
+
+    </transaction-detail>
+</div>
