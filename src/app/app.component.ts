@@ -23,7 +23,7 @@ export class AppComponent {
     },
     {
         "link": '/transactions',
-        "name": 'Passengers',
+        "name": 'Transactions',
         "exact": true
     },
     {
