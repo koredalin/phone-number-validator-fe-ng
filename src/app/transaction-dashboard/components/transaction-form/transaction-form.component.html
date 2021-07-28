@@ -1,0 +1,72 @@
+<h3>Transaction Form Component</h3>
+<div>
+<form
+    (ngSubmit)="handleSubmit(form.value, form.valid)"
+    #form="ngForm"
+    novalidate>
+    <div>
+        Transaction id: {{ form.value?.id }}.
+    </div>
+
+    <div>
+        Transaction email:
+        <input
+            type="text"
+            name="email"
+            required
+            #email="ngModel"
+            [ngModel]="detail?.email">
+        <div>
+            Transaction email is required!
+        </div>
+    </div>
+
+    <div>
+        Transaction email:
+        <input
+            type="text"
+            name="phoneNumber"
+            required
+            #email="ngModel"
+            [ngModel]="detail?.phoneNumber">
+        <div>
+            Transaction phone number is required!
+        </div>
+    </div>
+
+    <div>
+        Transaction email:
+        <input
+            type="text"
+            name="password"
+            required
+            #email="ngModel"
+            [ngModel]="detail?.phoneNumber">
+        <div>
+            Transaction phone number is required!
+        </div>
+    </div>
+
+    <div>
+        <input
+            type="checkbox"
+            name="confirmed"
+            [ngModel]="detail?.confirmed"
+            (ngModelChange)="toggleConfirmation($event)">
+    </div>
+
+    <div *ngIf="form.value.confirmed">
+        Confirmed at: 
+        <input
+            type="number"
+            name="confirmedAt"
+            [ngModel]="detail?.confirmed">
+    </div>
+
+    <button
+        type="submit"
+        [disabled]="form.invalid">
+        Update transaction
+    </button>
+</form>
+</div>

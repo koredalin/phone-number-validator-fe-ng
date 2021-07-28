@@ -8,6 +8,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { TransactionDashboardComponent } from "./containers/transaction-dashboard/transaction-dashboard.component";
 
 // Components
+import { TransactionDetailComponent } from "./components/transaction-detail/transaction-detail.component";
+import { TransactionFormComponent } from "./components/transaction-form/transaction-form.component";
 
 // Services
 import { TransactionDashboardService } from "./transaction-dashboard.service";
@@ -22,10 +24,11 @@ const routes = [
 @NgModule({
     declarations: [
         // Containers
-        TransactionDashboardComponent
+        TransactionDashboardComponent,
 
         // Components
-
+        TransactionDetailComponent,
+        TransactionFormComponent
     ],
     imports: [
         CommonModule,

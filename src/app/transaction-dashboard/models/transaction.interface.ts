@@ -3,5 +3,6 @@ export interface TransactionInterface {
     email: string,
     phoneNumber: string,
     password: string,
-    confirmed: false
+    confirmed: false,
+    confirmedAt?: number
 }
