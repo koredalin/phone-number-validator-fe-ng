@@ -9,6 +9,7 @@ import { TransactionDashboardComponent } from "./containers/transaction-dashboar
 
 // Components
 import { TransactionDetailComponent } from "./components/transaction-detail/transaction-detail.component";
+import { TransactionViewerComponent } from "./containers/transaction-viewer/transaction-viewer.component";
 import { TransactionFormComponent } from "./components/transaction-form/transaction-form.component";
 
 // Services
@@ -18,6 +19,10 @@ const routes = [
     {
         path: '',
         component: TransactionDashboardComponent
+    },
+    {
+        path: ':id',
+        component: TransactionViewerComponent
     }
 ];
 
@@ -28,6 +33,7 @@ const routes = [
 
         // Components
         TransactionDetailComponent,
+        TransactionViewerComponent,
         TransactionFormComponent
     ],
     imports: [

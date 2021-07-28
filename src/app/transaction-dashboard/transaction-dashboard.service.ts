@@ -20,4 +20,16 @@ export class TransactionDashboardService {
         return this.httpClient
             .get<TransactionInterface>(url);
     }
+
+    updateTransaction(transaction: TransactionInterface): Observable<TransactionInterface> {
+        let url = TRANSACTION_API+'/'+transaction.id;
+        let headers = new HttpHeaders({
+            "Content type": 'application/json'
+        });
+        let options = {
+            "headers": headers
+        };
+        return this.httpClient
+            .put<TransactionInterface>(url, transaction, options);
+    }
 }
