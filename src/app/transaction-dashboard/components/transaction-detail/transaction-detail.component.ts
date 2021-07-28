@@ -3,7 +3,7 @@ import { TransactionInterface } from "../../models/transaction.interface";
 
 @Component({
     selector: 'transaction-detail',
-    styleUrls: ['transaction-detail.component.css'],
+    styleUrls: ['transaction-detail.component.scss'],
    templateUrl: './transaction-detail.component.html'
 })
 

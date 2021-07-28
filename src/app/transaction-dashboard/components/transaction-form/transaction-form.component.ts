@@ -3,7 +3,7 @@ import { TransactionInterface } from "../../models/transaction.interface";
 
 @Component({
     selector: 'transaction-form',
-    styleUrls: ['transaction-form.component.css'],
+    styleUrls: ['transaction-form.component.scss'],
    templateUrl: './transaction-form.component.html'
 })
 
