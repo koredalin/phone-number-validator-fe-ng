@@ -9,7 +9,6 @@
         <input
             type="text"
             name="id"
-            required
             readonly
             #id="ngModel"
             [ngModel]="detail?.id">
@@ -29,7 +28,7 @@
     </div>
 
     <div>
-        Transaction email:
+        Transaction phone number:
         <input
             type="text"
             name="phoneNumber"
@@ -42,7 +41,7 @@
     </div>
 
     <div>
-        Transaction email:
+        Transaction password:
         <input
             type="password"
             name="password"
@@ -50,7 +49,7 @@
             #email="ngModel"
             [ngModel]="detail?.password">
         <div>
-            Transaction phone number is required!
+            Transaction password is required!
         </div>
     </div>
 

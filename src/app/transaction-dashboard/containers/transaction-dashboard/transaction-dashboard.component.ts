@@ -31,4 +31,8 @@ export class TransactionDashboardComponent implements OnInit {
     handleView(event: TransactionInterface) {
         this.router.navigate(['/transactions', event.id]);
     }
+
+    goToCreateTransaction() {
+        this.router.navigate(['/transactions/create']);
+    }
 }

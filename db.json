@@ -39,6 +39,38 @@
       "phoneNumber": "4563456353453",
       "password": "ggggg",
       "confirmed": false
+    },
+    {
+      "id": 4
+    },
+    {
+      "email": "user8@test.com",
+      "phoneNumber": "34526535635",
+      "password": "eeerrr",
+      "confirmed": true,
+      "confirmedAt": 3454346563444,
+      "id": 5
+    },
+    {
+      "id": 6,
+      "email": "mail6@test.com",
+      "phoneNumber": "34535636",
+      "password": "222333",
+      "confirmed": null
+    },
+    {
+      "email": "mail7@test.com",
+      "phoneNumber": "34634764574",
+      "password": "111222",
+      "confirmed": false,
+      "id": 7
+    },
+    {
+      "id": 8,
+      "email": "mail8@test.com",
+      "phoneNumber": "544587585696",
+      "password": "333444",
+      "confirmed": false
     }
   ]
 }

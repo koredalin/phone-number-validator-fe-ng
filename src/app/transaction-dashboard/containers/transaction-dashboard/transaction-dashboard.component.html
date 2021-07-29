@@ -5,6 +5,12 @@
         {{ transaction.email }}
     </div>
 
+    <button
+        type="button"
+        (click)="goToCreateTransaction()">
+        Create transaction
+    </button>
+
     <transaction-detail
         *ngFor="let transaction of transactions;"
         [detail]="transaction"

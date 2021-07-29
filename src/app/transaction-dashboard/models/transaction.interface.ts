@@ -1,5 +1,5 @@
 export interface TransactionInterface {
-    id?: number,
+    id: number | null,
     email: string,
     phoneNumber: string,
     password: string,

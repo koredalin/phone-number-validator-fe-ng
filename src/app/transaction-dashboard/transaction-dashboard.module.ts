@@ -9,6 +9,7 @@ import { TransactionDashboardComponent } from "./containers/transaction-dashboar
 
 // Components
 import { TransactionDetailComponent } from "./components/transaction-detail/transaction-detail.component";
+import { TransactionCreatorComponent } from "./containers/transaction-creator/transaction-creator.component";
 import { TransactionViewerComponent } from "./containers/transaction-viewer/transaction-viewer.component";
 import { TransactionEditorComponent } from "./containers/transaction-editor/transaction-editor.component";
 import { TransactionFormComponent } from "./components/transaction-form/transaction-form.component";
@@ -25,8 +26,8 @@ const routes = [
                 component: TransactionDashboardComponent
             },
             {
-                path: ':id',
-                component: TransactionViewerComponent
+                path: 'create',
+                component: TransactionCreatorComponent
             },
             {
                 path: 'edit/:id',
@@ -47,8 +48,9 @@ const routes = [
 
         // Components
         TransactionDetailComponent,
-        TransactionViewerComponent,
+        TransactionCreatorComponent,
         TransactionEditorComponent,
+        TransactionViewerComponent,
         TransactionFormComponent
     ],
     imports: [
