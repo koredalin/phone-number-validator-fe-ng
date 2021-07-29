@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, Params, ActivatedRouteSnapshot } from "@angular/router";
+import { Component } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
 import { TransactionDashboardService } from "../../transaction-dashboard.service";
 import { TransactionInterface } from "../../models/transaction.interface";
 
@@ -10,7 +10,7 @@ import { TransactionInterface } from "../../models/transaction.interface";
 })
 
 
-export class TransactionCreatorComponent implements OnInit {
+export class TransactionCreatorComponent {
     transaction: TransactionInterface;
 
     constructor(
@@ -18,27 +18,13 @@ export class TransactionCreatorComponent implements OnInit {
         private route: ActivatedRoute,
         private transactionService: TransactionDashboardService
     ) {}
-
-    ngOnInit() {
-        this.transaction = {
-            "id": null,
-            "email": "",
-            "phoneNumber": "",
-            "password": "",
-            "confirmed": false
-        };
-        // this.route.params.subscribe((data: Params) => {
-        //     this.transactionService
-        //         .getTransaction(data.id)
-        //         .subscribe((data: TransactionInterface) => this.transaction = data);
-        // });
-    }
+    
 
     onCreateTransaction(event: TransactionInterface) {
         this.transactionService
             .createTransaction(event)
             .subscribe((data: TransactionInterface) => {
-                this.transaction = Object.assign({}, this.transaction, event);
+                this.transaction = Object.assign({}, this.transaction, data);
             });
     }
 
