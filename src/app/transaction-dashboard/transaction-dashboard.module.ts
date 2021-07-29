@@ -17,12 +17,17 @@ import { TransactionDashboardService } from "./transaction-dashboard.service";
 
 const routes = [
     {
-        path: '',
-        component: TransactionDashboardComponent
-    },
-    {
-        path: ':id',
-        component: TransactionViewerComponent
+        "path": 'transactions',
+        "children": [
+            {
+                path: '',
+                component: TransactionDashboardComponent
+            },
+            {
+                path: ':id',
+                component: TransactionViewerComponent
+            }
+        ]
     }
 ];
 
