@@ -5,7 +5,14 @@
     #form="ngForm"
     novalidate>
     <div>
-        Transaction id: {{ form.value?.id }}.
+        Transaction id:
+        <input
+            type="text"
+            name="id"
+            required
+            readonly
+            #id="ngModel"
+            [ngModel]="detail?.id">
     </div>
 
     <div>
@@ -37,11 +44,11 @@
     <div>
         Transaction email:
         <input
-            type="text"
+            type="password"
             name="password"
             required
             #email="ngModel"
-            [ngModel]="detail?.phoneNumber">
+            [ngModel]="detail?.password">
         <div>
             Transaction phone number is required!
         </div>
@@ -60,7 +67,7 @@
         <input
             type="number"
             name="confirmedAt"
-            [ngModel]="detail?.confirmed">
+            [ngModel]="detail?.confirmedAt">
     </div>
 
     <button
