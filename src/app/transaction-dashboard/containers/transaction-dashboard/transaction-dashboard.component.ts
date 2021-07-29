@@ -24,6 +24,10 @@ export class TransactionDashboardComponent implements OnInit {
             .subscribe((responseData: TransactionInterface[]) => this.transactions = responseData);
     }
 
+    handleEdit(event: TransactionInterface) {
+        this.router.navigate(['/transactions/edit', event.id]);
+    }
+
     handleView(event: TransactionInterface) {
         this.router.navigate(['/transactions', event.id]);
     }

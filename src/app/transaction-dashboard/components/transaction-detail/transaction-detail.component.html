@@ -3,6 +3,10 @@
     <span class="status" [class.confirmed]="detail.confirmed"></span>
     <p>{{ detail | json }}</p>
 
+    <button type="button" (click)="goToEditTransaction()">
+        Edit
+    </button>
+
     <button type="button" (click)="goToTransaction()">
         View
     </button>

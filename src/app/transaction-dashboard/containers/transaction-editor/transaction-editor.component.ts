@@ -4,13 +4,13 @@ import { TransactionDashboardService } from "../../transaction-dashboard.service
 import { TransactionInterface } from "../../models/transaction.interface";
 
 @Component({
-    selector: 'transaction-viewer',
+    selector: 'transaction-editor',
     styleUrls: [],
-    templateUrl: './transaction-viewer.component.html'
+    templateUrl: './transaction-editor.component.html'
 })
 
 
-export class TransactionViewerComponent implements OnInit {
+export class TransactionEditorComponent implements OnInit {
     transaction: TransactionInterface;
 
     constructor(
@@ -25,6 +25,14 @@ export class TransactionViewerComponent implements OnInit {
                 .getTransaction(data.id)
                 .subscribe((data: TransactionInterface) => this.transaction = data);
         });
+    }
+
+    onUpdateTransaction(event: TransactionInterface) {
+        this.transactionService
+            .updateTransaction(event)
+            .subscribe((data: TransactionInterface) => {
+                this.transaction = Object.assign({}, this.transaction, event);
+            });
     }
 
     goBack() {
