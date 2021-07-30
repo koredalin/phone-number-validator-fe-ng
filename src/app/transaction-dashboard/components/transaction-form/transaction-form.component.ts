@@ -11,6 +11,9 @@ export class TransactionFormComponent {
     @Input()
     detail: TransactionInterface;
 
+    @Input()
+    action: string;
+
     @Output()
     update: EventEmitter<TransactionInterface> = new EventEmitter<TransactionInterface>();
 

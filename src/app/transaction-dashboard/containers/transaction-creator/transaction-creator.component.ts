@@ -12,6 +12,7 @@ import { TransactionInterface } from "../../models/transaction.interface";
 
 export class TransactionCreatorComponent {
     transaction: TransactionInterface;
+    action: string = 'create';
 
     constructor(
         private router: Router,
@@ -24,7 +25,8 @@ export class TransactionCreatorComponent {
         this.transactionService
             .createTransaction(event)
             .subscribe((data: TransactionInterface) => {
-                this.transaction = Object.assign({}, this.transaction, data);
+                this.router.navigate(['/transactions/view', data.id]);
+                //this.transaction = Object.assign({}, this.transaction, data);
             });
     }
 

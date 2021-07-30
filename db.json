@@ -41,7 +41,8 @@
       "email": "user1@test.com",
       "phoneNumber": "4563456353453",
       "password": "ggggg",
-      "confirmed": false
+      "confirmed": true,
+      "confirmedAt": 1627582092299
     },
     {
       "id": 4
@@ -57,7 +58,7 @@
     {
       "id": 6,
       "email": "mail6@test.com",
-      "phoneNumber": "34535636",
+      "phoneNumber": "345356364",
       "password": "222333",
       "confirmed": null
     },
@@ -157,6 +158,13 @@
       "email": "dsfg@test.com",
       "phoneNumber": "34364365",
       "password": "fff",
+      "confirmed": null
+    },
+    {
+      "id": 21,
+      "email": "hh@test.com",
+      "phoneNumber": "453235626",
+      "password": "ddff",
       "confirmed": null
     }
   ]

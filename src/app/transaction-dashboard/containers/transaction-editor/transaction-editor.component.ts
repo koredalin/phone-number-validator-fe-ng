@@ -12,6 +12,7 @@ import { TransactionInterface } from "../../models/transaction.interface";
 
 export class TransactionEditorComponent implements OnInit {
     transaction: TransactionInterface;
+    action: string = 'edit';
 
     constructor(
         private router: Router,
@@ -31,7 +32,8 @@ export class TransactionEditorComponent implements OnInit {
         this.transactionService
             .updateTransaction(event)
             .subscribe((data: TransactionInterface) => {
-                this.transaction = Object.assign({}, this.transaction, event);
+                this.router.navigate(['/transactions/view', data.id]);
+                //this.transaction = Object.assign({}, this.transaction, event);
             });
     }
 

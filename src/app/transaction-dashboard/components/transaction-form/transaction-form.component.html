@@ -72,7 +72,14 @@
     <button
         type="submit"
         [disabled]="form.invalid">
-        Update transaction
+
+        <span *ngIf="action==='create'; else actionUpdate">
+            Create transaction
+        </span>
+        <ng-template #actionUpdate>
+            Update transaction
+        </ng-template>
+        
     </button>
 </form>
 </div>
