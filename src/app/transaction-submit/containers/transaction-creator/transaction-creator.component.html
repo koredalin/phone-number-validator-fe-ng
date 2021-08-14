@@ -1,0 +1,19 @@
+<h3>Transaction Creator container</h3>
+
+<div>
+    <div>
+        {{ transaction | json }}
+    </div>
+
+    <button
+        (click)="goBack()">
+        &lsaquo; Go back
+    </button>
+
+    <transaction-form
+        [detail]="transaction"
+        [action]="action"
+        (update)="onCreateTransaction($event)">
+
+    </transaction-form>
+</div>

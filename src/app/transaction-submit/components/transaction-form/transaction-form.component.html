@@ -1,0 +1,75 @@
+<h3>Transaction Form Component</h3>
+<div>
+<form
+    (ngSubmit)="handleSubmit(form.value, form.valid)"
+    #form="ngForm"
+    novalidate>
+
+    <div>
+        Transaction email:
+        <input
+            type="text"
+            name="email"
+            required
+            #email="ngModel"
+            [ngModel]="detail?.email">
+        <div>
+            Transaction email is required!
+        </div>
+    </div>
+
+    <div>
+        <span>
+            Transaction phone code:
+            <input
+                type="select"
+                name="phoneCode"
+                required
+                #email="ngModel"
+                [ngModel]="detail?.phoneCode">
+            <div>
+                Transaction phone number is required!
+            </div>
+        </span>
+
+        <span>
+            Transaction phone number:
+            <input
+                type="text"
+                name="phoneNumber"
+                required
+                #email="ngModel"
+                [ngModel]="detail?.phoneNumber">
+            <div>
+                Transaction phone number is required!
+            </div>
+        </span>
+    </div>
+
+    <div>
+        Transaction password:
+        <input
+            type="password"
+            name="password"
+            required
+            #email="ngModel"
+            [ngModel]="detail?.password">
+        <div>
+            Transaction password is required!
+        </div>
+    </div>
+
+    <button
+        type="submit"
+        [disabled]="form.invalid">
+
+        <span *ngIf="action==='create'; else actionUpdate">
+            Create transaction
+        </span>
+        <ng-template #actionUpdate>
+            Update transaction
+        </ng-template>
+        
+    </button>
+</form>
+</div>
