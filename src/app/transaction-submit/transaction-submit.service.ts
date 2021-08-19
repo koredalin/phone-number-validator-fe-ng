@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 const TRANSACTION_API = 'http://localhost:3000/transactions';
 
 @Injectable()
-export class RegistrationService {
+export class TransactionSubmitService {
     constructor(private httpClient: HttpClient) {}
 
     getTransactions(): Observable<TransactionRegistrationInterface[]> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, Params, ActivatedRouteSnapshot } from "@angular/router";
-import { TransactionDashboardService } from "../../transaction-dashboard.service";
+import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionRegistrationInterface } from "../../models/transaction.interface";
 
 @Component({
@@ -16,7 +16,7 @@ export class TransactionViewerComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private transactionService: TransactionDashboardService
+        private transactionService: TransactionSubmitService
     ) {}
 
     ngOnInit() {
