@@ -19,10 +19,6 @@ export class TransactionFormComponent {
 
     constructor() {}
 
-    toggleConfirmation(isConfirmed: boolean) {
-        this.detail.confirmedAt = Date.now();
-    }
-
     handleSubmit(transaction: TransactionInterface, isValid: boolean | null) {
         if (isValid) {
             this.update.emit(transaction);

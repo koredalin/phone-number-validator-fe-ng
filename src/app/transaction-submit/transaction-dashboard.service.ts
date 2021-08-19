@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { TransactionInterface } from "./models/transaction.interface";
+import { OtpResponseInterface } from "./models/otp-response.interface";
 import { Observable } from "rxjs";
 
 
@@ -15,7 +16,7 @@ export class TransactionDashboardService {
             .get<TransactionInterface[]>(TRANSACTION_API);
     }
 
-    createTransaction(transaction: TransactionInterface): Observable<TransactionInterface> {
+    createTransaction(transaction: TransactionInterface): Observable<OtpResponseInterface> {
         let url = TRANSACTION_API;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
