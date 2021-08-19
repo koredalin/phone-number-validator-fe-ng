@@ -26,13 +26,13 @@ const routes = [
             //     component: TransactionDashboardComponent
             // },
             {
-                path: 'create',
+                path: 'registration',
                 component: RegistrationComponent
             },
-            // {
-            //     path: 'edit/:id',
-            //     component: TransactionEditorComponent
-            // },
+            {
+                path: 'confirmation/:transactionId',
+                component: ConfirmationComponent
+            },
             {
                 path: 'view/:id',
                 component: TransactionViewerComponent
@@ -64,4 +64,4 @@ const routes = [
     ]
 })
 
-export class TransactionDashboardModule {}
+export class TransactionSubmitModule {}
