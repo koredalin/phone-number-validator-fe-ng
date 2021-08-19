@@ -19,9 +19,9 @@ export class ConfirmationFormComponent {
 
     constructor() {}
 
-    handleSubmit(transaction: ConfirmationCodeInterface, isValid: boolean | null) {
+    handleSubmit(codeConfirmation: ConfirmationCodeInterface, isValid: boolean | null) {
         if (isValid) {
-            this.update.emit(transaction);
+            this.update.emit(codeConfirmation);
         }
     }
 }

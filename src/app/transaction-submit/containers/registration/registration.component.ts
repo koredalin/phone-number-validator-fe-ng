@@ -1,24 +1,24 @@
 import { Component } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { TransactionDashboardService } from "../../transaction-dashboard.service";
+import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionRegistrationInterface } from "../../models/transaction.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
 
 @Component({
-    selector: 'transaction-creator',
+    selector: 'registration',
     styleUrls: [],
     templateUrl: './registration.component.html'
 })
 
 
 export class RegistrationComponent {
-    transaction: TransactionRegistrationInterface;
+    registration: TransactionRegistrationInterface;
     action: string = 'create';
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private transactionService: TransactionDashboardService
+        private transactionService: TransactionSubmitService
     ) {}
     
 

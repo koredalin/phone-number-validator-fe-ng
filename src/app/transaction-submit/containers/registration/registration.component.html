@@ -2,7 +2,7 @@
 
 <div>
     <div>
-        {{ transaction | json }}
+        {{ registration | json }}
     </div>
 
     <button
@@ -10,10 +10,10 @@
         &lsaquo; Go back
     </button>
 
-    <transaction-form
-        [detail]="transaction"
+    <registration-form
+        [detail]="registration"
         [action]="action"
         (update)="onCreateTransaction($event)">
 
-    </transaction-form>
+    </registration-form>
 </div>

@@ -2,7 +2,7 @@
 
 <div>
     <div>
-        {{ transaction | json }}
+        {{ codeConfirmation | json }}
     </div>
 
     <button
@@ -10,10 +10,10 @@
         &lsaquo; Go back
     </button>
 
-    <transaction-form
-        [detail]="transaction"
+    <confirmation-form
+        [detail]="codeConfirmation"
         [action]="action"
         (update)="onCreateTransaction($event)">
 
-    </transaction-form>
+    </confirmation-form>
 </div>

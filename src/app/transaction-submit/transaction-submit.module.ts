@@ -11,10 +11,11 @@ import { TransactionDetailComponent } from "./components/transaction-detail/tran
 import { RegistrationComponent } from "./containers/registration/registration.component";
 import { TransactionViewerComponent } from "./containers/transaction-viewer/transaction-viewer.component";
 import { RegistrationFormComponent } from "./components/registration-form/registration-form.component";
+import { ConfirmationComponent } from "./containers/confirmation/confirmation.component";
 import { ConfirmationFormComponent } from "./components/confirmation-form/confirmation-form.component";
 
 // Services
-import { TransactionDashboardService } from "./transaction-dashboard.service";
+import { TransactionSubmitService } from "./transaction-submit.service";
 
 const routes = [
     {
@@ -47,6 +48,7 @@ const routes = [
         // Components
         TransactionDetailComponent,
         RegistrationComponent,
+        ConfirmationComponent,
         TransactionViewerComponent,
         RegistrationFormComponent,
         ConfirmationFormComponent
@@ -58,7 +60,7 @@ const routes = [
         RouterModule.forChild(routes)
     ],
     providers: [
-        TransactionDashboardService
+        TransactionSubmitService
     ]
 })
 

@@ -1,30 +1,30 @@
 import { Component } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { TransactionDashboardService } from "../../transaction-dashboard.service";
-import { TransactionRegistrationInterface } from "../../models/transaction.interface";
+import { TransactionSubmitService } from "../../transaction-submit.service";
+import { ConfirmationCodeInterface } from "../../models/confirmation-code.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
 
 @Component({
-    selector: 'transaction-creator',
+    selector: 'confirmation',
     styleUrls: [],
-    templateUrl: './registration.component.html'
+    templateUrl: './confirmation.component.html'
 })
 
 
 export class ConfirmationComponent {
-    transaction: TransactionRegistrationInterface;
+    codeConfirmation: ConfirmationCodeInterface;
     action: string = 'create';
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private transactionService: TransactionDashboardService
+        private transactionService: TransactionSubmitService
     ) {}
     
 
-    onCreateTransaction(event: TransactionRegistrationInterface) {
+    onCreateTransaction(event: ConfirmationCodeInterface) {
         this.transactionService
-            .registration(event)
+            .confirmation(event)
             .subscribe((data: OtpResponseInterface) => {
                 if (data.response.isSuccess) {
                     this.router.navigate([data.arguments.nextWebPage || '']);
