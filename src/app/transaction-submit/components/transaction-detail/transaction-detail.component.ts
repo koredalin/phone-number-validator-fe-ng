@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from "@angular/core";
-import { TransactionInterface } from "../../models/transaction.interface";
+import { TransactionRegistrationInterface } from "../../models/transaction.interface";
 import { Router } from "@angular/router";
 
 @Component({
@@ -10,13 +10,13 @@ import { Router } from "@angular/router";
 
 export class TransactionDetailComponent implements OnChanges {
     @Input()
-    detail: TransactionInterface;
+    detail: TransactionRegistrationInterface;
 
     @Output()
-    edit: EventEmitter<TransactionInterface> = new EventEmitter<TransactionInterface>();
+    edit: EventEmitter<TransactionRegistrationInterface> = new EventEmitter<TransactionRegistrationInterface>();
 
     @Output()
-    view: EventEmitter<TransactionInterface> = new EventEmitter<TransactionInterface>();
+    view: EventEmitter<TransactionRegistrationInterface> = new EventEmitter<TransactionRegistrationInterface>();
 
     constructor(
         private router: Router

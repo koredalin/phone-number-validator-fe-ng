@@ -1,18 +1,18 @@
 import { Component } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TransactionDashboardService } from "../../transaction-dashboard.service";
-import { TransactionInterface } from "../../models/transaction.interface";
+import { TransactionRegistrationInterface } from "../../models/transaction.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
 
 @Component({
     selector: 'transaction-creator',
     styleUrls: [],
-    templateUrl: './transaction-creator.component.html'
+    templateUrl: './registration.component.html'
 })
 
 
-export class TransactionCreatorComponent {
-    transaction: TransactionInterface;
+export class RegistrationComponent {
+    transaction: TransactionRegistrationInterface;
     action: string = 'create';
 
     constructor(
@@ -22,9 +22,9 @@ export class TransactionCreatorComponent {
     ) {}
     
 
-    onCreateTransaction(event: TransactionInterface) {
+    onCreateTransaction(event: TransactionRegistrationInterface) {
         this.transactionService
-            .createTransaction(event)
+            .registration(event)
             .subscribe((data: OtpResponseInterface) => {
                 if (data.response.isSuccess) {
                     this.router.navigate([data.arguments.nextWebPage || '']);

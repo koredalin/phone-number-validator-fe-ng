@@ -1,3 +1,3 @@
 export interface ConfirmationCodeInterface {
-    code: number
+    confirmationCode: number
 }

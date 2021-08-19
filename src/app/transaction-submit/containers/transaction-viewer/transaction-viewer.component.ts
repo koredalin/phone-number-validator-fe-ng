@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, Params, ActivatedRouteSnapshot } from "@angular/router";
 import { TransactionDashboardService } from "../../transaction-dashboard.service";
-import { TransactionInterface } from "../../models/transaction.interface";
+import { TransactionRegistrationInterface } from "../../models/transaction.interface";
 
 @Component({
     selector: 'transaction-viewer',
@@ -11,7 +11,7 @@ import { TransactionInterface } from "../../models/transaction.interface";
 
 
 export class TransactionViewerComponent implements OnInit {
-    transaction: TransactionInterface;
+    transaction: TransactionRegistrationInterface;
 
     constructor(
         private router: Router,
@@ -23,7 +23,7 @@ export class TransactionViewerComponent implements OnInit {
         this.route.params.subscribe((data: Params) => {
             this.transactionService
                 .getTransaction(data.id)
-                .subscribe((data: TransactionInterface) => this.transaction = data);
+                .subscribe((data: TransactionRegistrationInterface) => this.transaction = data);
         });
     }
 

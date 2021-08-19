@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { TransactionInterface } from "./models/transaction.interface";
+import { TransactionRegistrationInterface } from "./models/transaction.interface";
 import { OtpResponseInterface } from "./models/otp-response.interface";
 import { Observable } from "rxjs";
 
@@ -11,12 +11,12 @@ const TRANSACTION_API = 'http://localhost:3000/transactions';
 export class TransactionDashboardService {
     constructor(private httpClient: HttpClient) {}
 
-    getTransactions(): Observable<TransactionInterface[]> {
+    getTransactions(): Observable<TransactionRegistrationInterface[]> {
         return this.httpClient
-            .get<TransactionInterface[]>(TRANSACTION_API);
+            .get<TransactionRegistrationInterface[]>(TRANSACTION_API);
     }
 
-    createTransaction(transaction: TransactionInterface): Observable<OtpResponseInterface> {
+    registration(transaction: TransactionRegistrationInterface): Observable<OtpResponseInterface> {
         let url = TRANSACTION_API;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
@@ -26,16 +26,16 @@ export class TransactionDashboardService {
         };
         
         return this.httpClient
-            .post<TransactionInterface>(url, transaction, options);
+            .post<OtpResponseInterface>(url, transaction, options);
     }
 
-    getTransaction(id: number): Observable<TransactionInterface> {
+    getTransaction(id: number): Observable<TransactionRegistrationInterface> {
         let url = TRANSACTION_API+'/'+id;
         return this.httpClient
-            .get<TransactionInterface>(url);
+            .get<TransactionRegistrationInterface>(url);
     }
 
-    updateTransaction(transaction: TransactionInterface): Observable<TransactionInterface> {
+    updateTransaction(transaction: TransactionRegistrationInterface): Observable<TransactionRegistrationInterface> {
         let url = TRANSACTION_API+'/'+transaction.id;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
@@ -45,6 +45,6 @@ export class TransactionDashboardService {
         };
         
         return this.httpClient
-            .put<TransactionInterface>(url, transaction, options);
+            .put<TransactionRegistrationInterface>(url, transaction, options);
     }
 }

@@ -1,4 +1,4 @@
-export interface TransactionInterface {
+export interface TransactionRegistrationInterface {
     email: string,
     phoneCode: string,
     phoneNumber: string,

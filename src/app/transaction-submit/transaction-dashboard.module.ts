@@ -5,14 +5,13 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 
 // Containers
-import { TransactionDashboardComponent } from "./containers/transaction-dashboard/transaction-dashboard.component";
 
 // Components
 import { TransactionDetailComponent } from "./components/transaction-detail/transaction-detail.component";
-import { TransactionCreatorComponent } from "./containers/transaction-creator/transaction-creator.component";
+import { RegistrationComponent } from "./containers/registration/registration.component";
 import { TransactionViewerComponent } from "./containers/transaction-viewer/transaction-viewer.component";
-import { TransactionEditorComponent } from "./containers/transaction-editor/transaction-editor.component";
-import { TransactionFormComponent } from "./components/transaction-form/transaction-form.component";
+import { RegistrationFormComponent } from "./components/registration-form/registration-form.component";
+import { ConfirmationFormComponent } from "./components/confirmation-form/confirmation-form.component";
 
 // Services
 import { TransactionDashboardService } from "./transaction-dashboard.service";
@@ -21,18 +20,18 @@ const routes = [
     {
         "path": 'transactions',
         "children": [
-            {
-                path: '',
-                component: TransactionDashboardComponent
-            },
+            // {
+            //     path: '',
+            //     component: TransactionDashboardComponent
+            // },
             {
                 path: 'create',
-                component: TransactionCreatorComponent
+                component: RegistrationComponent
             },
-            {
-                path: 'edit/:id',
-                component: TransactionEditorComponent
-            },
+            // {
+            //     path: 'edit/:id',
+            //     component: TransactionEditorComponent
+            // },
             {
                 path: 'view/:id',
                 component: TransactionViewerComponent
@@ -44,14 +43,13 @@ const routes = [
 @NgModule({
     declarations: [
         // Containers
-        TransactionDashboardComponent,
 
         // Components
         TransactionDetailComponent,
-        TransactionCreatorComponent,
-        TransactionEditorComponent,
+        RegistrationComponent,
         TransactionViewerComponent,
-        TransactionFormComponent
+        RegistrationFormComponent,
+        ConfirmationFormComponent
     ],
     imports: [
         CommonModule,

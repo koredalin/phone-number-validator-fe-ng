@@ -1,0 +1,33 @@
+<h3>Transaction Form Component</h3>
+<div>
+<form
+    (ngSubmit)="handleSubmit(form.value, form.valid)"
+    #form="ngForm"
+    novalidate>
+
+    <div>
+        <span>
+            Transaction phone number:
+            <input
+                type="text"
+                name="confirmationCode"
+                required
+                #confirmationCode="ngModel"
+                [ngModel]="detail?.confirmationCode">
+            <div>
+                Transaction phone number is required!
+            </div>
+        </span>
+    </div>
+
+    <button
+        type="submit"
+        [disabled]="form.invalid">
+
+        <span>
+            Confirm the code
+        </span>
+        
+    </button>
+</form>
+</div>
