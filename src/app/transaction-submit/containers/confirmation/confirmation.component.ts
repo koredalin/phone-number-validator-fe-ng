@@ -13,8 +13,6 @@ import { OtpResponseInterface } from "../../models/otp-response.interface";
 
 export class ConfirmationComponent implements OnInit{
     codeConfirmation: ConfirmationCodeInterface;
-    confirmationResponse: OtpResponseInterface | null;
-    resetResponse: OtpResponseInterface | null;
     confirmationError: string;
     resetError: string;
     resetSuccess: boolean | null;
@@ -27,20 +25,19 @@ export class ConfirmationComponent implements OnInit{
     
 
     ngOnInit() {
-        this.confirmationResponse = null;
-        this.resetResponse = null;
         this.confirmationError = "";
         this.resetSuccess = null;
         this.resetError = "";
     }
 
-    onCreateTransaction(event: ConfirmationCodeInterface) {
+    onCodeConfirmation(event: ConfirmationCodeInterface) {
         this.transactionService
             .confirmation(event)
             .subscribe((data: OtpResponseInterface) => {
                 if (data.response.isSuccess) {
                     this.router.navigate([data.arguments.nextWebPage || '']);
                 } else {
+                    this.confirmationError = data.arguments.errors;
                     console.log(data.arguments.errors);
                 }
 
@@ -53,8 +50,10 @@ export class ConfirmationComponent implements OnInit{
             .reset()
             .subscribe((data: OtpResponseInterface) => {
                 if (data.response.isSuccess) {
-                    this.router.navigate([data.arguments.nextWebPage || '']);
+                    this.resetSuccess = true;
                 } else {
+                    this.resetSuccess = false;
+                    this.resetError = data.arguments.errors;
                     console.log(data.arguments.errors);
                 }
 

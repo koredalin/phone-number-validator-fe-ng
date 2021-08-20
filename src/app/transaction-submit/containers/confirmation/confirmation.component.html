@@ -3,6 +3,7 @@
 <div>
     <div>
         {{ codeConfirmation | json }}
+        <div class="red">{{ confirmationError }}</div>
     </div>
 
     <span>
@@ -10,9 +11,10 @@
             (click)="resetCode()">
             &lsaquo; Reset Code
         </button>
-        <div id="reset_message">
-
+        <div *ngIf="resetSuccess;" class="blue">
+            The new confirmation code is sent to your phone
         </div>
+        <div class="red">{{ resetError }}</div>
 
         <button
             (click)="goBack()">
