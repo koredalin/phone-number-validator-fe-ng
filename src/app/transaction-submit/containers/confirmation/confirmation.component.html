@@ -5,15 +5,24 @@
         {{ codeConfirmation | json }}
     </div>
 
-    <button
-        (click)="goBack()">
-        &lsaquo; Go back
-    </button>
+    <span>
+        <button
+            (click)="resetCode()">
+            &lsaquo; Reset Code
+        </button>
+        <div id="reset_message">
+
+        </div>
+
+        <button
+            (click)="goBack()">
+            &lsaquo; Go back
+        </button>
+    </span>
 
     <confirmation-form
         [detail]="codeConfirmation"
-        [action]="action"
-        (update)="onCreateTransaction($event)">
+        (update)="onCodeConfirmation($event)">
 
     </confirmation-form>
 </div>

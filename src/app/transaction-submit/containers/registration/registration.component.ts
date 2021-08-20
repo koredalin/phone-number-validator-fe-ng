@@ -13,7 +13,6 @@ import { OtpResponseInterface } from "../../models/otp-response.interface";
 
 export class RegistrationComponent {
     registration: TransactionRegistrationInterface;
-    action: string = 'create';
 
     constructor(
         private router: Router,
@@ -22,7 +21,7 @@ export class RegistrationComponent {
     ) {}
     
 
-    onCreateTransaction(event: TransactionRegistrationInterface) {
+    onRegistration(event: TransactionRegistrationInterface) {
         this.transactionService
             .registration(event)
             .subscribe((data: OtpResponseInterface) => {

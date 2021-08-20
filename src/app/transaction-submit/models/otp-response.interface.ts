@@ -1,6 +1,8 @@
 export interface OtpResponseInterface {
     "response": {
-        "isSuccess": boolean
+        "isSuccess": boolean,
+        "email?": string,
+        "phoneNumber?": number
     },
     "arguments": {
         "nextWebPage": string,

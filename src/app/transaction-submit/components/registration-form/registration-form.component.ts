@@ -11,9 +11,6 @@ export class RegistrationFormComponent {
     @Input()
     detail: TransactionRegistrationInterface;
 
-    @Input()
-    action: string;
-
     @Output()
     update: EventEmitter<TransactionRegistrationInterface> = new EventEmitter<TransactionRegistrationInterface>();
 
