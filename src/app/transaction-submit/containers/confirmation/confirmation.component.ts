@@ -25,9 +25,9 @@ export class ConfirmationComponent implements OnInit{
     
 
     ngOnInit() {
-        this.confirmationError = "";
+        this.confirmationError = '';
         this.resetSuccess = null;
-        this.resetError = "";
+        this.resetError = '';
     }
 
     onCodeConfirmation(event: ConfirmationCodeInterface) {
@@ -37,7 +37,7 @@ export class ConfirmationComponent implements OnInit{
                 if (data.response.isSuccess) {
                     this.router.navigate([data.arguments.nextWebPage || '']);
                 } else {
-                    this.confirmationError = data.arguments.errors;
+                    this.confirmationError = data.arguments.errors || '';
                     console.log(data.arguments.errors);
                 }
 
@@ -53,7 +53,7 @@ export class ConfirmationComponent implements OnInit{
                     this.resetSuccess = true;
                 } else {
                     this.resetSuccess = false;
-                    this.resetError = data.arguments.errors;
+                    this.resetError = data.arguments.errors || '';
                     console.log(data.arguments.errors);
                 }
 

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionRegistrationInterface } from "../../models/transaction.interface";
@@ -11,8 +11,9 @@ import { OtpResponseInterface } from "../../models/otp-response.interface";
 })
 
 
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
     registration: TransactionRegistrationInterface;
+    registrationError: string;
 
     constructor(
         private router: Router,
@@ -21,6 +22,10 @@ export class RegistrationComponent {
     ) {}
     
 
+    ngOnInit() {
+        this.registrationError = '';
+    }
+
     onRegistration(event: TransactionRegistrationInterface) {
         this.transactionService
             .registration(event)
@@ -28,6 +33,7 @@ export class RegistrationComponent {
                 if (data.response.isSuccess) {
                     this.router.navigate([data.arguments.nextWebPage || '']);
                 } else {
+                    this.registrationError = data.arguments.errors || '';
                     console.log(data.arguments.errors);
                 }
 
