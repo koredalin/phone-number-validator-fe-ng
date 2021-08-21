@@ -6,7 +6,7 @@
     novalidate>
 
     <div>
-        Transaction email:
+        Email:
         <input
             type="text"
             name="email"
@@ -20,20 +20,23 @@
 
     <div>
         <span>
-            Transaction phone code:
-            <input
-                type="select"
+            Country phone code:
+            <select
                 name="phoneCode"
                 required
                 #phoneCode="ngModel"
                 [ngModel]="detail?.phoneCode">
+                <option *ngFor="let country of countries" [ngValue]="country.phone_code">
+                    {{ country.country_name }}
+                </option>
+            </select>
             <div>
                 Transaction phone number is required!
             </div>
         </span>
 
         <span>
-            Transaction phone number:
+            Phone number:
             <input
                 type="text"
                 name="phoneNumber"
@@ -47,7 +50,7 @@
     </div>
 
     <div>
-        Transaction password:
+        Password:
         <input
             type="password"
             name="password"

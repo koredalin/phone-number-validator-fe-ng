@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
 import { NotFoundComponent } from './not-found.component';
 import { TransactionDashboardModule } from './transaction-dashboard/transaction-dashboard.module'
+import { TransactionSubmitModule } from './transaction-submit/transaction-submit.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -28,7 +29,8 @@ const routes: Routes = [
     // AppRoutingModule
     RouterModule.forRoot(routes),
     // Custom modules
-    TransactionDashboardModule
+    TransactionDashboardModule,
+    TransactionSubmitModule
   ],
   providers: [],
   bootstrap: [AppComponent]

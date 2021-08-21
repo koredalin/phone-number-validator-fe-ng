@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { TransactionRegistrationInterface } from "../../models/transaction.interface";
+import { TransactionRegistrationInterface } from "../../models/transaction-registration.interface";
+import { CountryInterface } from "src/assets/nomenclatures/models/country.interface";
 
 @Component({
     selector: 'registration-form',
@@ -10,6 +11,8 @@ import { TransactionRegistrationInterface } from "../../models/transaction.inter
 export class RegistrationFormComponent {
     @Input()
     detail: TransactionRegistrationInterface;
+    @Input()
+    countries: Array<CountryInterface>;
 
     @Output()
     update: EventEmitter<TransactionRegistrationInterface> = new EventEmitter<TransactionRegistrationInterface>();

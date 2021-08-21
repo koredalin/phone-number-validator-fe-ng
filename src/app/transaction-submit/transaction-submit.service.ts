@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from "@angular/common/http";
-import { TransactionRegistrationInterface } from "./models/transaction.interface";
+import { TransactionRegistrationInterface } from "./models/transaction-registration.interface";
 import { ConfirmationCodeInterface } from "./models/confirmation-code.interface";
 import { OtpResponseInterface } from "./models/otp-response.interface";
 import { Observable } from "rxjs";
@@ -69,5 +69,9 @@ export class TransactionSubmitService {
         let url = OTP_API+'/'+id;
         return this.httpClient
             .get<TransactionRegistrationInterface>(url);
+    }
+    
+    public getCountries(): Observable<any> {
+        return this.httpClient.get("./../../assets//nomenclatures/countries.json");
     }
 }

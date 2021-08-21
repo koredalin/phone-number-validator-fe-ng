@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from "@angular/core";
-import { TransactionRegistrationInterface } from "../../models/transaction.interface";
+import { TransactionRegistrationInterface } from "../../models/transaction-registration.interface";
 import { Router } from "@angular/router";
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, Params, ActivatedRouteSnapshot } from "@angular/router";
 import { TransactionSubmitService } from "../../transaction-submit.service";
-import { TransactionRegistrationInterface } from "../../models/transaction.interface";
+import { TransactionRegistrationInterface } from "../../models/transaction-registration.interface";
 
 @Component({
     selector: 'transaction-viewer',
