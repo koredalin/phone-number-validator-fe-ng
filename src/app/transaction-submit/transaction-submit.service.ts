@@ -72,6 +72,6 @@ export class TransactionSubmitService {
     }
     
     public getCountries(): Observable<any> {
-        return this.httpClient.get("./../../assets//nomenclatures/countries.json");
+        return this.httpClient.get("./../../assets/nomenclatures/countries.json");
     }
 }

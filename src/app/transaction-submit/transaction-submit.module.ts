@@ -7,6 +7,7 @@ import { RouterModule, Routes } from "@angular/router";
 // Containers
 
 // Components
+import { TransactionSubmitComponent } from "./containers/transaction-submit/transaction-submit.component";
 import { TransactionDetailComponent } from "./components/transaction-detail/transaction-detail.component";
 import { RegistrationComponent } from "./containers/registration/registration.component";
 import { TransactionViewerComponent } from "./containers/transaction-viewer/transaction-viewer.component";
@@ -19,12 +20,12 @@ import { TransactionSubmitService } from "./transaction-submit.service";
 
 const routes = [
     {
-        "path": 'transactions',
+        "path": 'transaction-submit',
         "children": [
-            // {
-            //     path: '',
-            //     component: TransactionDashboardComponent
-            // },
+            {
+                path: '',
+                component: TransactionSubmitComponent
+            },
             {
                 path: 'registration',
                 component: RegistrationComponent

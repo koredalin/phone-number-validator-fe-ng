@@ -27,6 +27,11 @@ export class AppComponent {
         "exact": true
     },
     {
+        "link": '/transaction-submit',
+        "name": 'Transaction Submit',
+        "exact": true
+    },
+    {
         "link": '/oops',
         "name": '404',
         "exact": false

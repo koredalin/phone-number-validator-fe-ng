@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
             .registration(event)
             .subscribe((data: OtpResponseInterface) => {
                 if (data.response.isSuccess) {
-                    this.router.navigate([data.arguments.nextWebPage || '']);
+                    this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
                 } else {
                     this.registrationError = data.arguments.errors || '';
                     console.log(data.arguments.errors);
