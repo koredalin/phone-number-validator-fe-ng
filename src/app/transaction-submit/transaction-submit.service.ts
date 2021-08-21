@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 const OTP_API = 'http://localhost:6886';
 const API_REGISTRATION = '/registration';
 const API_CODE_CONFIRMATION = '/confirmation';
-const API_CODE_CONFIRMATION_RESET = '/reset';
+const API_CODE_CONFIRMATION_RESET = '/reset-code';
 
 @Injectable()
 export class TransactionSubmitService {
@@ -38,7 +38,8 @@ export class TransactionSubmitService {
     }
 
     confirmation(codeConfirmation: ConfirmationCodeInterface): Observable<OtpResponseInterface> {
-        let url = OTP_API+this.router.url;
+        let urlEnd = this.getUrlEnd(this.router.url);
+        let url = OTP_API+API_CODE_CONFIRMATION+'/'+urlEnd;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
         });
@@ -51,9 +52,8 @@ export class TransactionSubmitService {
     }
 
     reset(): Observable<OtpResponseInterface> {
-        let urlArr = this.router.url.split("/") || [];
-        console.log(urlArr);
-        let url = OTP_API+API_CODE_CONFIRMATION_RESET+'/'+(urlArr[urlArr.length - 1] || '0');
+        let urlEnd = this.getUrlEnd(this.router.url);
+        let url = OTP_API+API_CODE_CONFIRMATION_RESET+'/'+urlEnd;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
         });
@@ -73,5 +73,11 @@ export class TransactionSubmitService {
     
     public getCountries(): Observable<any> {
         return this.httpClient.get("./../../assets/nomenclatures/countries.json");
+    }
+
+    private getUrlEnd(urlStr: string): string {
+        let urlArr = urlStr.split("/") || [];
+
+        return (urlArr[urlArr.length - 1] || '');
     }
 }
