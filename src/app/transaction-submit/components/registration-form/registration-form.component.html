@@ -8,18 +8,22 @@
     <div>
         Email:
         <input
-            type="text"
+            type="email"
             name="email"
             required
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             #email="ngModel"
             [ngModel]="detail?.email">
-        <div>
+        <div *ngIf="email.errors?.required && email.dirty" class="red">
             Transaction email is required!
+        </div>
+        <div *ngIf="email.errors?.pattern" class="red">
+            Please, enter a valid email address!
         </div>
     </div>
 
     <div>
-        <span>
+        <div>
             Country phone code:
             <select
                 name="phoneCode"
@@ -31,23 +35,27 @@
                     {{ country.country_name }}
                 </option>
             </select>
-            <div>
+            <div *ngIf="phoneCode.errors?.required && phoneCode.dirty" class="red">
                 Transaction phone number is required!
             </div>
-        </span>
+        </div>
 
-        <span>
+        <div>
             Phone number:
             <input
                 type="text"
                 name="phoneNumber"
                 required
+                pattern="^[0-9]+$"
                 #phoneNumber="ngModel"
                 [ngModel]="detail?.phoneNumber">
-            <div>
+            <div *ngIf="phoneNumber.errors?.required && phoneNumber.dirty" class="red">
                 Transaction phone number is required!
             </div>
-        </span>
+            <div *ngIf="phoneNumber.errors?.pattern" class="red">
+                Please, enter numbers only!
+            </div>
+        </div>
     </div>
 
     <div>
@@ -56,10 +64,16 @@
             type="password"
             name="password"
             required
+            minlength="4"
+            maxlength="20"
             #password="ngModel"
             [ngModel]="detail?.password">
-        <div>
+        <div *ngIf="password.errors?.required && password.dirty" class="red">
             Transaction password is required!
+        </div>
+        <div *ngIf="password.errors?.minlength || password.errors?.maxlength" class="red">
+            <div>The password should have at least 4 symbols.</div>
+            <div>The maximum number of symbols is 20.</div>
         </div>
     </div>
 

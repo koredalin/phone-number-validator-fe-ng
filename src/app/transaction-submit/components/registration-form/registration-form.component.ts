@@ -5,7 +5,7 @@ import { CountryInterface } from "src/assets/nomenclatures/models/country.interf
 @Component({
     selector: 'registration-form',
     styleUrls: ['registration-form.component.scss'],
-   templateUrl: './registration-form.component.html'
+    templateUrl: './registration-form.component.html'
 })
 
 export class RegistrationFormComponent {
@@ -19,6 +19,7 @@ export class RegistrationFormComponent {
 
     constructor() {}
 
+    
     handleSubmit(transaction: TransactionRegistrationInterface, isValid: boolean | null) {
         if (isValid) {
             this.update.emit(transaction);
