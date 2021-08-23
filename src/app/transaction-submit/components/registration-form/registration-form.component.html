@@ -47,7 +47,9 @@
                 name="phoneNumber"
                 required
                 pattern="^[0-9]+$"
+                mask="{{ phoneNumberMask }}"
                 #phoneNumber="ngModel"
+                (ngModelChange)="toggleMask(phoneNumber.value)"
                 [ngModel]="detail?.phoneNumber">
             <div *ngIf="phoneNumber.errors?.required && phoneNumber.dirty" class="red">
                 Transaction phone number is required!

@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
+import { NgxMaskModule, IConfig } from "ngx-mask";
 
 // Containers
 
@@ -17,6 +18,10 @@ import { ConfirmationFormComponent } from "./components/confirmation-form/confir
 
 // Services
 import { TransactionSubmitService } from "./transaction-submit.service";
+
+const maskConfig: Partial<IConfig> = {
+    validation: false
+};
 
 const routes = [
     {
@@ -58,6 +63,7 @@ const routes = [
         CommonModule,
         HttpClientModule,
         FormsModule,
+        NgxMaskModule.forRoot(maskConfig),
         RouterModule.forChild(routes)
     ],
     providers: [
