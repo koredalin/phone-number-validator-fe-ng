@@ -1,9 +1,11 @@
 <h3>Transaction Registration form</h3>
 <div>
 <form
-    (ngSubmit)="handleSubmit(form.value, form.valid)"
-    #form="ngForm"
+    (ngSubmit)="handleSubmit(registrationForm.value, registrationForm.valid)"
+    #registrationForm="ngForm"
     novalidate>
+
+    {{ registrationForm.value | json }}
 
     <div>
         Email:
@@ -30,8 +32,8 @@
                 required
                 #phoneCode="ngModel"
                 [ngModel]="detail?.phoneCode">
-                <option [ngValue]="-1" disabled selected>Please select</option>
-                <option *ngFor="let country of countries" [ngValue]="country.phone_code">
+                <option [value]="null" disabled selected>Please select</option>
+                <option *ngFor="let country of countries" [value]="country.phone_code">
                     {{ country.country_name }}
                 </option>
             </select>
@@ -49,7 +51,7 @@
                 pattern="^[0-9]+$"
                 mask="{{ phoneNumberMask }}"
                 #phoneNumber="ngModel"
-                (ngModelChange)="toggleMask(phoneNumber.value)"
+                (ngModelChange)="toggleMask($event)"
                 [ngModel]="detail?.phoneNumber">
             <div *ngIf="phoneNumber.errors?.required && phoneNumber.dirty" class="red">
                 Transaction phone number is required!
@@ -81,7 +83,7 @@
 
     <button
         type="submit"
-        [disabled]="form.invalid">
+        [disabled]="registrationForm.invalid">
 
         <span>
             Create transaction
