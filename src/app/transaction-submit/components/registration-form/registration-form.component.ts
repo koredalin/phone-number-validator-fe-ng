@@ -35,7 +35,7 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     toggleMask(phoneNumberValue: string) {
-        if (this.isBulgarianPhoneNumber(phoneNumberValue)) {
+        if (this.isLeadingZeroString(phoneNumberValue)) {
             this.phoneNumberMask = PHONE_NUMBER_MASK;
             this.detail.phoneCode = BULGARIAN_PHONE_CODE;
         } else {
@@ -44,14 +44,10 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     setPhoneNumberMask(phoneCodeValue: string) {
-        console.log(phoneCodeValue);
-        console.log(this.detail.phoneNumber);
-        console.log(this.isBulgarianPhoneNumber(this.detail.phoneNumber));
         if (
             phoneCodeValue !== BULGARIAN_PHONE_CODE
-            && this.isBulgarianPhoneNumber(this.detail.phoneNumber)
+            && this.isLeadingZeroString(this.detail.phoneNumber)
         ) {
-            console.log('ACTION');
             this.phoneNumberMask = '';
             this.detail.phoneNumber = this.detail.phoneNumber.substring(1);
         }
@@ -63,14 +59,14 @@ export class RegistrationFormComponent implements OnInit {
         }
     }
 
-    private isBulgarianPhoneNumber(phoneNumberValue: string): boolean {
+    private isLeadingZeroString(phoneNumberValue: string): boolean {
         return (phoneNumberValue.length || 0) > 0 && phoneNumberValue.substring(0, 1) === '0';
     }
 
     getFinalAssembledPhoneNumber(): string {
         let phoneNum = this.detail.phoneNumber;
         if (this.detail.phoneCode === BULGARIAN_PHONE_CODE
-            && this.isBulgarianPhoneNumber(phoneNum)) {
+            && this.isLeadingZeroString(phoneNum)) {
             return (this.detail.phoneCode || '')+this.detail.phoneNumber.substring(1);
         }
         
