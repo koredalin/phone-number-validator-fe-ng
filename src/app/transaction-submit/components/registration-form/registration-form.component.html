@@ -24,14 +24,15 @@
         </div>
     </div>
 
-    <div>
+    <div id="assembledPhoneNumber">
         <div>
             Country phone code:
             <select
                 name="phoneCode"
                 required
                 #phoneCode="ngModel"
-                [ngModel]="detail?.phoneCode">
+                (ngModelChange)="setPhoneNumberMask($event)"
+                [(ngModel)]="detail.phoneCode">
                 <option [value]="null" disabled selected>Please select</option>
                 <option *ngFor="let country of countries" [value]="country.phone_code">
                     {{ country.country_name }}
@@ -52,13 +53,17 @@
                 mask="{{ phoneNumberMask }}"
                 #phoneNumber="ngModel"
                 (ngModelChange)="toggleMask($event)"
-                [ngModel]="detail?.phoneNumber">
+                [(ngModel)]="detail.phoneNumber">
             <div *ngIf="phoneNumber.errors?.required && phoneNumber.dirty" class="red">
                 Transaction phone number is required!
             </div>
             <div *ngIf="phoneNumber.errors?.pattern" class="red">
                 Please, enter numbers only!
             </div>
+        </div>
+
+        <div *ngIf="detail.phoneNumber.length">
+            Assembled phone number: +{{ getFinalAssembledPhoneNumber() }}.
         </div>
     </div>
 
