@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationEnd} from '@angular/router';
-// import { KeyValue } from '@angular/common';
-
-const getKeyValue = <T extends object, U extends keyof T>(key: U) => (obj: T) =>
-  obj[key];
-
 
 interface Nav {
   link: string,
