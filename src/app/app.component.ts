@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavigationEnd} from '@angular/router';
 
 interface Nav {
   link: string,
@@ -14,6 +16,7 @@ interface Nav {
 
 export class AppComponent {
   title = 'phone-validator-fe-ng-scss Rendering flow';
+  currentUrlArr: Array<string>;
 
   nav: Nav[] = [
     {
@@ -38,5 +41,13 @@ export class AppComponent {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private router: Router,
+  ) {
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.currentUrlArr = e.url.trim().split('/') || [];
+      }
+    });
+  }
 }

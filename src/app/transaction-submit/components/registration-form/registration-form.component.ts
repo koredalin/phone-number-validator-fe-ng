@@ -65,8 +65,10 @@ export class RegistrationFormComponent implements OnInit {
 
     getFinalAssembledPhoneNumber(): string {
         let phoneNum = this.detail.phoneNumber;
-        if (this.detail.phoneCode === BULGARIAN_PHONE_CODE
-            && this.isLeadingZeroString(phoneNum)) {
+        if (
+            this.detail.phoneCode === BULGARIAN_PHONE_CODE
+            && this.isLeadingZeroString(phoneNum)
+        ) {
             return (this.detail.phoneCode || '')+this.detail.phoneNumber.substring(1);
         }
         
