@@ -1,6 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationEnd} from '@angular/router';
+
+  
+const URL_PATH_TITLES: { [key: string]: string } = {
+  "transactions": "Transactions",
+  "transaction-submit": "Transaction Submit",
+  "registration": "Registration",
+  "confirmation": "Confirmation",
+  // "": "",
+  // "": "",
+  // "": "",
+  // "": "",
+  // "": ""
+};
 
 interface Nav {
   link: string,
@@ -14,22 +27,11 @@ interface Nav {
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'phone-validator-fe-ng-scss Rendering flow';
+  currentUrl: string;
   currentUrlArr: Array<string>;
-
-  
-  urlPathTitles: { [key: string]: string } = {
-    "transaction-submit": "Transaction Submit",
-    "registration": "Registration",
-    "confirmation": "Confirmation",
-    // "": "",
-    // "": "",
-    // "": "",
-    // "": "",
-    // "": "",
-    // "": ""
-  };
+  breadCrumbHref: string;
 
   nav: Nav[] = [
     {
@@ -55,18 +57,33 @@ export class AppComponent {
   ];
 
   constructor(
-    private router: Router,
+    private router: Router
   ) {
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
-        this.currentUrlArr = e.url.trim().split('/') || [];
+        this.currentUrl = (e.url || '').trim();
+        this.currentUrlArr = this.currentUrl.split('/') || [];
       }
     });
   }
 
+  ngOnInit() {
+    this.resetBreadCrumbHref();
+  }
+
+  resetBreadCrumbHref(): void {
+    this.breadCrumbHref = '';
+  }
+
+  getCurrentBreadCrumbHref(urlPart: string): string {
+    this.breadCrumbHref += '/'+urlPart.trim();
+
+    return this.breadCrumbHref;
+  }
+
   getUrlPathTitle(urlPart: string): string {
-    if (this.urlPathTitles.hasOwnProperty(urlPart)) {
-      return this.urlPathTitles[urlPart];
+    if (URL_PATH_TITLES.hasOwnProperty(urlPart)) {
+      return URL_PATH_TITLES[urlPart];
     }
 
     return urlPart;

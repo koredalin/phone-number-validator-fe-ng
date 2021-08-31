@@ -9,13 +9,7 @@
   
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Home
-              <span class="visually-hidden">(current)</span>
-            </a>
-          </li>
-          <li
-            *ngFor="let item of nav"
+          <li *ngFor="let item of nav"
             class="nav-item">
             <a
               [routerLink]="item.link"
@@ -35,11 +29,12 @@
   </nav>
 
   <ol class="breadcrumb">
-    <ng-container *ngFor="let urlPart of currentUrlArr; index as i; first as isFirst; last as isLast">
+    {{ resetBreadCrumbHref() }} 
+    <ng-container *ngFor="let urlPart of currentUrlArr; index as i; first as isFirst; last as isLast;">
         <li class="breadcrumb-item"
             [ngClass]="{'active': isLast}"
             *ngIf="urlPart!==''; else homeLink">
-            <a href="/{{ urlPart }}">{{ getUrlPathTitle(urlPart) }}</a>
+            <a href="{{ getCurrentBreadCrumbHref(urlPart) }}">{{ getUrlPathTitle(urlPart) }}</a>
         </li>
         <ng-template #homeLink>
           <ng-container *ngIf="isFirst; else blankLink">
