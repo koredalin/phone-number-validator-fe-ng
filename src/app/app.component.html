@@ -35,29 +35,22 @@
   </nav>
 
   <ol class="breadcrumb">
-    <ng-container *ngFor="let urlPart of currentUrlArr; index as i; last as isLast">
+    <ng-container *ngFor="let urlPart of currentUrlArr; index as i; first as isFirst; last as isLast">
         <li class="breadcrumb-item"
             [ngClass]="{'active': isLast}"
             *ngIf="urlPart!==''; else homeLink">
-            <a href="/{{ urlPart }}">{{urlPart}}</a>
+            <a href="/{{ urlPart }}">{{ getUrlPathTitle(urlPart) }}</a>
         </li>
         <ng-template #homeLink>
+          <ng-container *ngIf="isFirst; else blankLink">
             <li class="breadcrumb-item">
                 <a href="/">Home</a>
             </li>
+          </ng-container>
         </ng-template>
+        <ng-template #blankLink></ng-template>
     </ng-container>
 </ol>
-
-  <!-- <nav>
-    <a
-      *ngFor="let item of nav"
-      [routerLink]="item.link"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: item.exact }">
-      {{ item.name }}
-    </a>
-  </nav> -->
 
   <router-outlet></router-outlet>
 

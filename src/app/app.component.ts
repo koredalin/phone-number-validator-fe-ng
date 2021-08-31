@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationEnd} from '@angular/router';
+// import { KeyValue } from '@angular/common';
+
+const getKeyValue = <T extends object, U extends keyof T>(key: U) => (obj: T) =>
+  obj[key];
+
 
 interface Nav {
   link: string,
@@ -17,6 +22,19 @@ interface Nav {
 export class AppComponent {
   title = 'phone-validator-fe-ng-scss Rendering flow';
   currentUrlArr: Array<string>;
+
+  
+  urlPathTitles: { [key: string]: string } = {
+    "transaction-submit": "Transaction Submit",
+    "registration": "Registration",
+    "confirmation": "Confirmation",
+    // "": "",
+    // "": "",
+    // "": "",
+    // "": "",
+    // "": "",
+    // "": ""
+  };
 
   nav: Nav[] = [
     {
@@ -49,5 +67,13 @@ export class AppComponent {
         this.currentUrlArr = e.url.trim().split('/') || [];
       }
     });
+  }
+
+  getUrlPathTitle(urlPart: string): string {
+    if (this.urlPathTitles.hasOwnProperty(urlPart)) {
+      return this.urlPathTitles[urlPart];
+    }
+
+    return urlPart;
   }
 }
