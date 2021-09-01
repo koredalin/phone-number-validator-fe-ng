@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 
 // API links
 const OTP_API = 'http://localhost:6886';
-const API_REGISTRATION = '/registration';
+const API_REGISTRATION = '/registration/phone-code-number';
 const API_CODE_CONFIRMATION = '/confirmation';
 const API_CODE_CONFIRMATION_RESET = '/reset-code';
 
