@@ -1,34 +1,41 @@
 <h3>Transaction Registration form</h3>
 <div>
+    
+    {{ registrationForm.value | json }}
+    
 <form
     (ngSubmit)="handleSubmit(registrationForm.value, registrationForm.valid)"
     #registrationForm="ngForm"
     novalidate>
 
-    {{ registrationForm.value | json }}
+    <fieldset>
 
-    <div>
-        Email:
+    <div class="form-group">
+        <label for="email" class="form-label mt-4">Email address</label>
         <input
             type="email"
             name="email"
+            class="form-control"
+            [ngClass]="{'is-invalid': ((email.errors?.required && email.dirty) || (email.errors?.pattern)) }"
             required
             pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             #email="ngModel"
             [ngModel]="detail?.email">
-        <div *ngIf="email.errors?.required && email.dirty" class="red">
+        <div *ngIf="email.errors?.required && email.dirty" class="invalid-feedback">
             Transaction email is required!
         </div>
-        <div *ngIf="email.errors?.pattern" class="red">
+        <div *ngIf="email.errors?.pattern" class="invalid-feedback">
             Please, enter a valid email address!
         </div>
     </div>
 
     <div id="assembledPhoneNumber">
-        <div>
-            Country phone code:
+        <div class="form-group">
+            <label for="email" class="form-label mt-4">Country phone code</label>
             <select
                 name="phoneCode"
+                class="form-control"
+                [ngClass]="{'is-invalid': (phoneCode.errors?.required && phoneCode.dirty) }"
                 required
                 #phoneCode="ngModel"
                 (ngModelChange)="setPhoneNumberMask($event)"
@@ -38,26 +45,28 @@
                     {{ country.country_name }}
                 </option>
             </select>
-            <div *ngIf="phoneCode.errors?.required && phoneCode.dirty" class="red">
+            <div *ngIf="phoneCode.errors?.required && phoneCode.dirty" class="invalid-feedback">
                 Transaction phone number is required!
             </div>
         </div>
 
-        <div>
-            Phone number:
+        <div class="form-group">
+            <label for="email" class="form-label mt-4">Phone number</label>
             <input
                 type="text"
                 name="phoneNumber"
+                class="form-control"
+                [ngClass]="{'is-invalid': (phoneNumber.errors?.pattern) }"
                 required
                 pattern="^[0-9]+$"
                 mask="{{ phoneNumberMask }}"
                 #phoneNumber="ngModel"
                 (ngModelChange)="toggleMask($event)"
                 [(ngModel)]="detail.phoneNumber">
-            <div *ngIf="phoneNumber.errors?.required && phoneNumber.dirty" class="red">
+            <div *ngIf="phoneNumber.errors?.required && phoneNumber.dirty" class="invalid-feedback">
                 Transaction phone number is required!
             </div>
-            <div *ngIf="phoneNumber.errors?.pattern" class="red">
+            <div *ngIf="phoneNumber.errors?.pattern" class="invalid-feedback">
                 Please, enter numbers only!
             </div>
         </div>
@@ -67,27 +76,31 @@
         </div>
     </div>
 
-    <div>
-        Password:
+    <div class="form-group">
+        <label for="email" class="form-label mt-4">Password</label>
         <input
             type="password"
             name="password"
+            class="form-control"
+            [ngClass]="{'is-invalid': ((password.errors?.required && password.dirty) || (password.errors?.minlength || password.errors?.maxlength)) }"
             required
             minlength="4"
             maxlength="20"
             #password="ngModel"
             [ngModel]="detail?.password">
-        <div *ngIf="password.errors?.required && password.dirty" class="red">
+        <div *ngIf="password.errors?.required && password.dirty" class="invalid-feedback">
             Transaction password is required!
         </div>
-        <div *ngIf="password.errors?.minlength || password.errors?.maxlength" class="red">
+        <div *ngIf="password.errors?.minlength || password.errors?.maxlength" class="invalid-feedback">
             <div>The password should have at least 4 symbols.</div>
             <div>The maximum number of symbols is 20.</div>
         </div>
     </div>
 
+    <div class="form-group">
     <button
         type="submit"
+        class="btn btn-primary"
         [disabled]="registrationForm.invalid">
 
         <span>
@@ -95,5 +108,7 @@
         </span>
         
     </button>
+    </div>
+    </fieldset>
 </form>
 </div>
