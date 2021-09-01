@@ -1,33 +1,39 @@
-<h3>Transaction Confirmation form</h3>
+<h3>Transaction Confirmation</h3>
 <div>
 <form
     (ngSubmit)="handleSubmit(form.value, form.valid)"
     #form="ngForm"
     novalidate>
 
-    <div>
-        <span>
-            Transaction phone number:
-            <input
-                type="text"
-                name="confirmationCode"
-                required
-                #confirmationCode="ngModel"
-                [ngModel]="detail?.confirmationCode">
-            <div>
-                Transaction phone number is required!
-            </div>
-        </span>
+    <fieldset>
+
+    <div class="form-group">
+        <label for="confirmationCode" class="form-label mt-4">Transaction phone number</label>
+        <input
+            type="text"
+            name="confirmationCode"
+            class="form-control"
+            [ngClass]="{'is-invalid': (confirmationCode.errors?.required && confirmationCode.dirty) }"
+            required
+            #confirmationCode="ngModel"
+            [ngModel]="detail?.confirmationCode">
+        <div *ngIf="confirmationCode.errors?.required && confirmationCode.dirty" class="invalid-feedback">
+            Transaction phone number is required!
+        </div>
+        <div class="text-danger">{{ confirmationError }}</div>
     </div>
 
-    <button
-        type="submit"
-        [disabled]="form.invalid">
+    <div class="form-group">
+        <button
+            type="submit"
+            class="btn btn-primary mt-4"
+            [disabled]="form.invalid">
+            <span>
+                Confirm the code
+            </span>
+        </button>
+    </div>
 
-        <span>
-            Confirm the code
-        </span>
-        
-    </button>
+    </fieldset>
 </form>
 </div>

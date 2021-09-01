@@ -17,7 +17,7 @@ export class TransactionSubmitService {
     constructor(
         private router: Router,
         private httpClient: HttpClient
-    ) {}
+    ) { }
 
     getTransactions(): Observable<TransactionRegistrationInterface[]> {
         return this.httpClient
@@ -25,52 +25,52 @@ export class TransactionSubmitService {
     }
 
     registration(transaction: TransactionRegistrationInterface): Observable<OtpResponseInterface> {
-        let url = OTP_API+API_REGISTRATION;
+        let url = OTP_API + API_REGISTRATION;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
         });
         let options = {
             "headers": headers
         };
-        
+
         return this.httpClient
             .post<OtpResponseInterface>(url, transaction, options);
     }
 
     confirmation(codeConfirmation: ConfirmationCodeInterface): Observable<OtpResponseInterface> {
         let urlEnd = this.getUrlEnd(this.router.url);
-        let url = OTP_API+API_CODE_CONFIRMATION+'/'+urlEnd;
+        let url = OTP_API + API_CODE_CONFIRMATION + '/' + urlEnd;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
         });
         let options = {
             "headers": headers
         };
-        
+
         return this.httpClient
             .post<OtpResponseInterface>(url, codeConfirmation, options);
     }
 
     reset(): Observable<OtpResponseInterface> {
         let urlEnd = this.getUrlEnd(this.router.url);
-        let url = OTP_API+API_CODE_CONFIRMATION_RESET+'/'+urlEnd;
+        let url = OTP_API + API_CODE_CONFIRMATION_RESET + '/' + urlEnd;
         let headers = new HttpHeaders({
             "Content-Type": "application/json"
         });
         let options = {
             "headers": headers
         };
-        
+
         return this.httpClient
             .get<OtpResponseInterface>(url, options);
     }
 
     getTransaction(id: number): Observable<TransactionRegistrationInterface> {
-        let url = OTP_API+'/'+id;
+        let url = OTP_API + '/' + id;
         return this.httpClient
             .get<TransactionRegistrationInterface>(url);
     }
-    
+
     public getCountries(): Observable<any> {
         return this.httpClient.get("./../../assets/nomenclatures/countries.json");
     }

@@ -33,16 +33,20 @@ export class ConfirmationComponent implements OnInit{
     onCodeConfirmation(event: ConfirmationCodeInterface) {
         this.transactionService
             .confirmation(event)
-            .subscribe((data: OtpResponseInterface) => {
-                if (data.response.isSuccess) {
-                    this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
-                } else {
-                    this.confirmationError = data.arguments.errors || '';
-                    console.log(data.arguments.errors);
+            .subscribe(
+                (data: OtpResponseInterface) => {
+                    if (data.response.isSuccess) {
+                        this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
+                    } else {
+                        this.confirmationError = data.arguments.errors || '';
+                        console.log(data.arguments.errors);
+                    }
+                    //this.transaction = Object.assign({}, this.transaction, data);
+                },
+                (error) => {
+                  this.confirmationError = error.error.arguments.errors || '';
                 }
-
-                //this.transaction = Object.assign({}, this.transaction, data);
-            });
+            );
     }
 
     resetCode() {

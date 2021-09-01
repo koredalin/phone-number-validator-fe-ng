@@ -11,6 +11,9 @@ export class ConfirmationFormComponent {
     @Input()
     detail: ConfirmationCodeInterface;
 
+    @Input()
+    confirmationError: string = '';
+
     @Output()
     update: EventEmitter<ConfirmationCodeInterface> = new EventEmitter<ConfirmationCodeInterface>();
 
