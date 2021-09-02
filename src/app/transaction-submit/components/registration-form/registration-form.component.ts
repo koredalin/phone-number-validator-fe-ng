@@ -16,6 +16,8 @@ export class RegistrationFormComponent implements OnInit {
     detail: TransactionRegistrationInterface;
     @Input()
     countries: Array<CountryInterface>;
+    @Input()
+    registrationError: string;
 
     @Output()
     update: EventEmitter<TransactionRegistrationInterface> = new EventEmitter<TransactionRegistrationInterface>();
@@ -32,6 +34,7 @@ export class RegistrationFormComponent implements OnInit {
             phoneNumber: '',
             password: ''
         };
+        this.registrationError = '';
     }
 
     toggleMask(phoneNumberValue: string) {

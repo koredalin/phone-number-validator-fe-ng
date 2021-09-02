@@ -39,12 +39,10 @@ export class ConfirmationComponent implements OnInit{
                         this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
                     } else {
                         this.confirmationError = data.arguments.errors || '';
-                        console.log(data.arguments.errors);
                     }
-                    //this.transaction = Object.assign({}, this.transaction, data);
                 },
                 (error) => {
-                  this.confirmationError = error.error.arguments.errors || '';
+                  this.confirmationError = error?.error?.arguments.errors || (JSON.stringify(error || 'UNKNOWN ERROR'));
                 }
             );
     }
@@ -52,17 +50,19 @@ export class ConfirmationComponent implements OnInit{
     resetCode() {
         this.transactionService
             .reset()
-            .subscribe((data: OtpResponseInterface) => {
-                if (data.response.isSuccess) {
-                    this.resetSuccess = true;
-                } else {
-                    this.resetSuccess = false;
-                    this.resetError = data.arguments.errors || '';
-                    console.log(data.arguments.errors);
+            .subscribe(
+                (data: OtpResponseInterface) => {
+                    if (data.response.isSuccess) {
+                        this.resetSuccess = true;
+                    } else {
+                        this.resetSuccess = false;
+                        this.resetError = data.arguments.errors || '';
+                    }
+                },
+                (error) => {
+                this.confirmationError = error?.error?.arguments.errors || (JSON.stringify(error || 'UNKNOWN ERROR'));
                 }
-
-                //this.transaction = Object.assign({}, this.transaction, data);
-            });
+            );
     }
 
     goBack() {

@@ -33,16 +33,19 @@ export class RegistrationComponent implements OnInit {
     onRegistration(event: TransactionRegistrationInterface) {
         this.transactionService
             .registration(event)
-            .subscribe((data: OtpResponseInterface) => {
-                if (data.response.isSuccess) {
-                    this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
-                } else {
-                    this.registrationError = data.arguments.errors || '';
-                    console.log(data.arguments.errors);
+            .subscribe(
+                (data: OtpResponseInterface) => {
+                    if (data.response.isSuccess) {
+                        this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
+                    } else {
+                        this.registrationError = data.arguments.errors || '';
+                    }
+                    //this.transaction = Object.assign({}, this.transaction, data);
+                },
+                (error) => {
+                    this.registrationError = error?.error?.arguments.errors || (JSON.stringify(error || 'UNKNOWN ERROR'));
                 }
-
-                //this.transaction = Object.assign({}, this.transaction, data);
-            });
+            );
     }
 
     goBack() {
