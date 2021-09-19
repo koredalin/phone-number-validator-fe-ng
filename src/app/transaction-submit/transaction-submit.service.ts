@@ -69,6 +69,15 @@ export class TransactionSubmitService {
 
     getTransaction(transactionInfo: TransactionInfoInterface): Observable<OtpResponseInterface> {
         let url = OTP_API + API_TRANSACTION_INFO + '/' + transactionInfo.transactionId;
+        
+        return this.httpClient
+            .get<OtpResponseInterface>(url);
+    }
+
+    getTransactionByUrlTransactionId(): Observable<OtpResponseInterface> {
+        let transactionId = this.getUrlEnd(this.router.url);
+        let url = OTP_API + API_TRANSACTION_INFO + '/' + transactionId;
+
         return this.httpClient
             .get<OtpResponseInterface>(url);
     }

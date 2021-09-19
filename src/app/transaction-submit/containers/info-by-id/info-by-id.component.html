@@ -1,9 +1,6 @@
 <h2>One Time Password (OTP)</h2>
 
 <div>
-    <div>
-        {{ transactionInfo | json }}
-    </div>
 
     <span>
         <button
@@ -13,19 +10,12 @@
         </button>
     </span>
 
-    <info-form
-        [detail]="transactionInfo"
-        [infoError]="infoError"
-        (update)="onGetInfo($event)">
-
-    </info-form>
-
-    <!-- {{ response | json }} -->
-
     <info-viewer
         [detail]="response"
         [infoError]="infoError">
 
     </info-viewer>
+
+    <!-- {{ response | json }} -->
 
 </div>
