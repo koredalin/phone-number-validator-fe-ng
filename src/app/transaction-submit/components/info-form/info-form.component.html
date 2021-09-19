@@ -1,0 +1,42 @@
+<h3>Single Transaction Info</h3>
+<div>
+    
+    <!-- {{ infoForm.value | json }} -->
+
+<form
+    (ngSubmit)="handleSubmit(infoForm.value, infoForm.valid)"
+    #infoForm="ngForm"
+    novalidate>
+
+    <fieldset>
+
+    <div class="form-group">
+        <label for="transactionId" class="form-label mt-4">Transaction phone number</label>
+        <input
+            type="text"
+            name="transactionId"
+            class="form-control"
+            [ngClass]="{'is-invalid': (transactionId.errors?.required && transactionId.dirty) }"
+            required
+            #transactionId="ngModel"
+            [ngModel]="detail?.transactionId">
+        <div *ngIf="transactionId.errors?.required && transactionId.dirty" class="invalid-feedback">
+            Transaction phone number is required!
+        </div>
+    </div>
+    <div class="text-danger">{{ infoError }}</div>
+
+    <div class="form-group">
+        <button
+            type="submit"
+            class="btn btn-primary mt-4"
+            [disabled]="infoForm.invalid">
+            <span>
+                Confirm the id
+            </span>
+        </button>
+    </div>
+
+    </fieldset>
+</form>
+</div>

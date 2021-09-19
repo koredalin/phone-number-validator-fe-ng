@@ -1,10 +1,18 @@
 export interface OtpResponseInterface {
     "response": {
-        "isSuccess": boolean,
-        "email?": string,
-        "phoneNumber?": number
+        transactionId?: number,
+        email?: string,
+        phoneNumber?: number,
+        transactionStatus?: string,
+        error?: string,
+        transactionConfirmedAt?: {
+            date: string,
+            timezone_type: number,
+            timezone: string
+        }
     },
     "arguments": {
+        "transactionId?": number,
         "nextWebPage": string,
         "errors": string
     }

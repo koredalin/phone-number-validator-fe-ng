@@ -1,0 +1,58 @@
+<h2>One Time Password (OTP)</h2>
+
+<div>
+    <div>
+        {{ transactionInfo | json }}
+    </div>
+
+    <span>
+        <button
+            class="btn btn-outline-info ml-3"
+            (click)="goBack()">
+            &lsaquo; Go back
+        </button>
+    </span>
+
+    <info-form
+        [detail]="transactionInfo"
+        [infoError]="infoError"
+        (update)="onGetInfo($event)">
+
+    </info-form>
+
+    <!-- {{ response | json }} -->
+
+    <div *ngIf="response !== null">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Transaction Id</th>
+                <td>{{ response?.response?.transactionId }}</td>
+            </tr>
+            <tr>
+                <th scope="row">E-mail</th>
+                <td>{{ response?.response?.email }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Phone Number</th>
+                <td>{{ response?.response?.phoneNumber}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Transaction Status</th>
+                <td>{{ response?.response?.transactionStatus }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Confirmed at</th>
+                <td>Date, time: {{ response?.response?.transactionConfirmedAt?.date }}, Time zone: {{ response?.response?.transactionConfirmedAt?.timezone }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

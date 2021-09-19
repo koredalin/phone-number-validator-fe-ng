@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { TransactionSubmitService } from "../../transaction-submit.service";
 import { ConfirmationCodeInterface } from "../../models/confirmation-code.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
+import { TransactionSubmitUrls } from "../../transaction-submit-urls.component";
 
 @Component({
     selector: 'confirmation',
@@ -11,7 +12,7 @@ import { OtpResponseInterface } from "../../models/otp-response.interface";
 })
 
 
-export class ConfirmationComponent implements OnInit{
+export class ConfirmationComponent implements OnInit {
     codeConfirmation: ConfirmationCodeInterface;
     confirmationError: string;
     resetError: string;
@@ -34,11 +35,12 @@ export class ConfirmationComponent implements OnInit{
         this.transactionService
             .confirmation(event)
             .subscribe(
-                (data: OtpResponseInterface) => {
-                    if (data.response.isSuccess) {
-                        this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
+                (responseContent: OtpResponseInterface) => {
+                    console.log(responseContent);
+                    if (responseContent.response.transactionStatus === 'confirmed') {
+                        this.confirmationError = responseContent.response.error || '';
                     } else {
-                        this.confirmationError = data.arguments.errors || '';
+                        this.router.navigate([TransactionSubmitUrls.TRANSACTION_INFO + responseContent.response?.transactionId || '']);
                     }
                 },
                 (error) => {
@@ -51,12 +53,11 @@ export class ConfirmationComponent implements OnInit{
         this.transactionService
             .reset()
             .subscribe(
-                (data: OtpResponseInterface) => {
-                    if (data.response.isSuccess) {
-                        this.resetSuccess = true;
+                (responseContent: OtpResponseInterface) => {
+                    if (responseContent.response.transactionStatus === 'confirmed') {
+                        this.confirmationError = responseContent.response.error || '';
                     } else {
-                        this.resetSuccess = false;
-                        this.resetError = data.arguments.errors || '';
+                        this.resetSuccess = true;
                     }
                 },
                 (error) => {

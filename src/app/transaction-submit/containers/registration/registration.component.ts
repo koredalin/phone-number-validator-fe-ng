@@ -4,13 +4,13 @@ import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionRegistrationInterface } from "../../models/transaction-registration.interface";
 import { CountryInterface } from "src/assets/nomenclatures/models/country.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
+import { TransactionSubmitUrls } from "../../transaction-submit-urls.component";
 
 @Component({
     selector: 'registration',
     styleUrls: [],
     templateUrl: './registration.component.html'
 })
-
 
 export class RegistrationComponent implements OnInit {
     registration: TransactionRegistrationInterface;
@@ -34,12 +34,8 @@ export class RegistrationComponent implements OnInit {
         this.transactionService
             .registration(event)
             .subscribe(
-                (data: OtpResponseInterface) => {
-                    if (data.response.isSuccess) {
-                        this.router.navigate(['/transaction-submit'+data.arguments.nextWebPage || '']);
-                    } else {
-                        this.registrationError = data.arguments.errors || '';
-                    }
+                (responseContent: OtpResponseInterface) => {
+                    this.router.navigate([TransactionSubmitUrls.CONFIRMATION+'/'+(responseContent.response.transactionId || '')]);
                     //this.transaction = Object.assign({}, this.transaction, data);
                 },
                 (error) => {

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from "@angular/common/http";
 import { TransactionRegistrationInterface } from "./models/transaction-registration.interface";
 import { ConfirmationCodeInterface } from "./models/confirmation-code.interface";
+import { TransactionInfoInterface } from "./models/transaction-info.interface";
 import { OtpResponseInterface } from "./models/otp-response.interface";
 import { Observable } from "rxjs";
 
@@ -11,6 +12,7 @@ const OTP_API = 'http://localhost:6886';
 const API_REGISTRATION = '/registration/phone-code-number';
 const API_CODE_CONFIRMATION = '/confirmation';
 const API_CODE_CONFIRMATION_RESET = '/reset-code';
+const API_TRANSACTION_INFO = '/transaction-info';
 
 @Injectable()
 export class TransactionSubmitService {
@@ -65,10 +67,10 @@ export class TransactionSubmitService {
             .get<OtpResponseInterface>(url, options);
     }
 
-    getTransaction(id: number): Observable<TransactionRegistrationInterface> {
-        let url = OTP_API + '/' + id;
+    getTransaction(transactionInfo: TransactionInfoInterface): Observable<OtpResponseInterface> {
+        let url = OTP_API + API_TRANSACTION_INFO + '/' + transactionInfo.transactionId;
         return this.httpClient
-            .get<TransactionRegistrationInterface>(url);
+            .get<OtpResponseInterface>(url);
     }
 
     public getCountries(): Observable<any> {
