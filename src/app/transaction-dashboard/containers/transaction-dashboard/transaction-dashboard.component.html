@@ -1,21 +1,27 @@
 <h3>Transaction dashboard container</h3>
 
 <div class="app">
-    <div *ngFor="let transaction of transactions;">
+    <!-- <div *ngFor="let transaction of transactions;">
         {{ transaction.email }}
+    </div> -->
+
+    <div class="alert alert-dismissible alert-warning">
+        <h4 class="alert-heading">Not developed yet.</h4>
+        <p class="mb-0">Multiple transactions reports are not developed yet. Please, go to:
+            <button
+                type="button"
+                class="btn btn-link"
+                (click)="goToSingleTransactionOperations()">
+                Single transaction operations
+            </button>
+        </p>
     </div>
 
-    <button
-        type="button"
-        (click)="goToCreateTransaction()">
-        Create transaction
-    </button>
-
-    <transaction-detail
+    <!-- <transaction-detail
         *ngFor="let transaction of transactions;"
         [detail]="transaction"
         (edit)="handleEdit($event)"
         (view)="handleView($event)">
 
-    </transaction-detail>
+    </transaction-detail> -->
 </div>

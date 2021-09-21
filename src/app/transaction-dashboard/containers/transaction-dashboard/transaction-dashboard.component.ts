@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { TransactionInterface } from "../../models/transaction.interface";
 import { TransactionDashboardService } from "../../transaction-dashboard.service";
+import { TransactionSubmitUrls } from "src/app/transaction-submit/transaction-submit-urls.component";
 
 @Component({
     selector: 'transaction-dashboard',
@@ -32,7 +33,7 @@ export class TransactionDashboardComponent implements OnInit {
         this.router.navigate(['/transactions', event.id]);
     }
 
-    goToCreateTransaction() {
-        this.router.navigate(['/transactions/create']);
+    goToSingleTransactionOperations() {
+        this.router.navigate([TransactionSubmitUrls.TRANSACTION_HOME]);
     }
 }

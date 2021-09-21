@@ -23,6 +23,23 @@
         <div *ngIf="transactionId.errors?.required && transactionId.dirty" class="invalid-feedback">
             Transaction phone number is required!
         </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label mt-4">Password</label>
+            <input
+                type="password"
+                name="password"
+                class="form-control"
+                [ngClass]="{'is-invalid': (password.dirty && (password.errors?.minlength || password.errors?.maxlength)) }"
+                minlength="4"
+                maxlength="20"
+                #password="ngModel"
+                [ngModel]="detail?.password">
+            <div *ngIf="(password.dirty && (password.errors?.minlength || password.errors?.maxlength))" class="invalid-feedback">
+                <div>The password should have at least 4 symbols.</div>
+                <div>The maximum number of symbols is 20.</div>
+            </div>
+        </div>
     </div>
     <div class="text-danger">{{ infoError }}</div>
 

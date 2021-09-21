@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionInfoInterface } from "../../models/transaction-info.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
-import { InfoFormComponent } from "../../components/info-form/info-form.component";
+import { TransactionSubmitUrls } from "../../transaction-submit-urls.component";
 
 @Component({
     selector: 'info',
@@ -30,6 +30,21 @@ export class InfoComponent implements OnInit {
     }
 
     onGetInfo(event: TransactionInfoInterface) {
+        if (typeof event.password !== 'undefined' && (event.password || '').length) {
+            this.transactionService
+                .getTransactionDetailedInfo(event)
+                .subscribe(
+                    (responseContent: OtpResponseInterface) => {
+                        console.log(responseContent);
+                        this.response = responseContent;
+                    },
+                    (error) => {
+                      this.infoError = error?.error?.arguments.errors || (JSON.stringify(error || 'UNKNOWN ERROR'));
+                    }
+                );
+            return;
+        }
+
         this.transactionService
             .getTransaction(event)
             .subscribe(
@@ -44,6 +59,6 @@ export class InfoComponent implements OnInit {
     }
 
     goBack() {
-        this.router.navigate(['/transactions']);
+        this.router.navigate([TransactionSubmitUrls.TRANSACTION_HOME]);
     }
 }

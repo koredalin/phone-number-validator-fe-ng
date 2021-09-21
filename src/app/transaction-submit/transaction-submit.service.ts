@@ -13,6 +13,7 @@ const API_REGISTRATION = '/registration/phone-code-number';
 const API_CODE_CONFIRMATION = '/confirmation';
 const API_CODE_CONFIRMATION_RESET = '/reset-code';
 const API_TRANSACTION_INFO = '/transaction-info';
+const API_TRANSACTION_DETAILED_INFO = '/transaction-detailed-info';
 
 @Injectable()
 export class TransactionSubmitService {
@@ -28,50 +29,39 @@ export class TransactionSubmitService {
 
     registration(transaction: TransactionRegistrationInterface): Observable<OtpResponseInterface> {
         let url = OTP_API + API_REGISTRATION;
-        let headers = new HttpHeaders({
-            "Content-Type": "application/json"
-        });
-        let options = {
-            "headers": headers
-        };
 
         return this.httpClient
-            .post<OtpResponseInterface>(url, transaction, options);
+            .post<OtpResponseInterface>(url, transaction, this.getDefaultHttpRequestOptions());
     }
 
     confirmation(codeConfirmation: ConfirmationCodeInterface): Observable<OtpResponseInterface> {
         let urlEnd = this.getUrlEnd(this.router.url);
         let url = OTP_API + API_CODE_CONFIRMATION + '/' + urlEnd;
-        let headers = new HttpHeaders({
-            "Content-Type": "application/json"
-        });
-        let options = {
-            "headers": headers
-        };
 
         return this.httpClient
-            .post<OtpResponseInterface>(url, codeConfirmation, options);
+            .post<OtpResponseInterface>(url, codeConfirmation, this.getDefaultHttpRequestOptions());
     }
 
     reset(): Observable<OtpResponseInterface> {
-        let urlEnd = this.getUrlEnd(this.router.url);
-        let url = OTP_API + API_CODE_CONFIRMATION_RESET + '/' + urlEnd;
-        let headers = new HttpHeaders({
-            "Content-Type": "application/json"
-        });
-        let options = {
-            "headers": headers
-        };
+        let transactionId = this.getUrlEnd(this.router.url);
+        let url = OTP_API + API_CODE_CONFIRMATION_RESET + '/' + transactionId;
 
         return this.httpClient
-            .get<OtpResponseInterface>(url, options);
+            .get<OtpResponseInterface>(url, this.getDefaultHttpRequestOptions());
     }
 
     getTransaction(transactionInfo: TransactionInfoInterface): Observable<OtpResponseInterface> {
         let url = OTP_API + API_TRANSACTION_INFO + '/' + transactionInfo.transactionId;
         
         return this.httpClient
-            .get<OtpResponseInterface>(url);
+            .get<OtpResponseInterface>(url, this.getDefaultHttpRequestOptions());
+    }
+
+    getTransactionDetailedInfo(transactionInfo: TransactionInfoInterface): Observable<OtpResponseInterface> {
+        let url = OTP_API + API_TRANSACTION_DETAILED_INFO + '/' + transactionInfo.transactionId;
+        
+        return this.httpClient
+            .post<OtpResponseInterface>(url, transactionInfo, this.getDefaultHttpRequestOptions());
     }
 
     getTransactionByUrlTransactionId(): Observable<OtpResponseInterface> {
@@ -79,7 +69,7 @@ export class TransactionSubmitService {
         let url = OTP_API + API_TRANSACTION_INFO + '/' + transactionId;
 
         return this.httpClient
-            .get<OtpResponseInterface>(url);
+            .get<OtpResponseInterface>(url, this.getDefaultHttpRequestOptions());
     }
 
     public getCountries(): Observable<any> {
@@ -90,5 +80,21 @@ export class TransactionSubmitService {
         let urlArr = urlStr.split("/") || [];
 
         return (urlArr[urlArr.length - 1] || '');
+    }
+
+    private getDefaultHttpRequestHeaders(): HttpHeaders {
+        let headers = new HttpHeaders({
+            "Content-Type": "application/json"
+        });
+        
+        return headers;
+    }
+
+    private getDefaultHttpRequestOptions(): Object {
+        let options = {
+            "headers": this.getDefaultHttpRequestHeaders()
+        };
+        
+        return options;
     }
 }

@@ -1,3 +1,4 @@
 export interface TransactionInfoInterface {
-    transactionId: number
+    transactionId: number,
+    password?: string
 }

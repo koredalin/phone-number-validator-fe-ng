@@ -2,6 +2,7 @@ export interface OtpResponseInterface {
     "response": {
         transactionId?: number,
         email?: string,
+        phoneCode?: number,
         phoneNumber?: number,
         transactionStatus?: string,
         error?: string,

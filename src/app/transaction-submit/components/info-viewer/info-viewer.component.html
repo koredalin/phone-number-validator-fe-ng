@@ -20,6 +20,10 @@
                  <th scope="row">E-mail</th>
                  <td>{{ detail?.response?.email }}</td>
              </tr>
+             <tr *ngIf="detail?.response?.phoneCode || '' !== ''">
+                 <th scope="row">Phone Code</th>
+                 <td>{{ detail?.response?.phoneCode }}</td>
+             </tr>
              <tr>
                  <th scope="row">Phone Number</th>
                  <td>{{ detail?.response?.phoneNumber}}</td>
