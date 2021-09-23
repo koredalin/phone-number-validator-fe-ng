@@ -13,6 +13,9 @@ import { TransactionSubmitUrls } from "src/app/transaction-submit/transaction-su
 
 export class TransactionDashboardComponent implements OnInit {
     transactions: TransactionInterface[] = [];
+    links = {
+        transactionSubmitHome: TransactionSubmitUrls.TRANSACTION_HOME
+    };
 
     constructor(
         private router: Router,
@@ -31,9 +34,5 @@ export class TransactionDashboardComponent implements OnInit {
 
     handleView(event: TransactionInterface) {
         this.router.navigate(['/transactions', event.id]);
-    }
-
-    goToSingleTransactionOperations() {
-        this.router.navigate([TransactionSubmitUrls.TRANSACTION_HOME]);
     }
 }

@@ -9,10 +9,7 @@ import { TransactionDashboardComponent } from "./containers/transaction-dashboar
 
 // Components
 import { TransactionDetailComponent } from "./components/transaction-detail/transaction-detail.component";
-import { TransactionCreatorComponent } from "./containers/transaction-creator/transaction-creator.component";
 import { TransactionViewerComponent } from "./containers/transaction-viewer/transaction-viewer.component";
-import { TransactionEditorComponent } from "./containers/transaction-editor/transaction-editor.component";
-import { TransactionFormComponent } from "./components/transaction-form/transaction-form.component";
 
 // Services
 import { TransactionDashboardService } from "./transaction-dashboard.service";
@@ -24,14 +21,6 @@ const routes = [
             {
                 path: '',
                 component: TransactionDashboardComponent
-            },
-            {
-                path: 'create',
-                component: TransactionCreatorComponent
-            },
-            {
-                path: 'edit/:id',
-                component: TransactionEditorComponent
             },
             {
                 path: 'view/:id',
@@ -48,10 +37,7 @@ const routes = [
 
         // Components
         TransactionDetailComponent,
-        TransactionCreatorComponent,
-        TransactionEditorComponent,
-        TransactionViewerComponent,
-        TransactionFormComponent
+        TransactionViewerComponent
     ],
     imports: [
         CommonModule,
