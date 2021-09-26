@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionInfoInterface } from "../../models/transaction-info.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
@@ -12,10 +14,11 @@ import { TransactionSubmitUrls } from "../../transaction-submit-urls.component";
 })
 
 
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit, OnDestroy {
     transactionInfo: TransactionInfoInterface;
     infoError: string;
     response: OtpResponseInterface | null;
+    private ngUnsubscribe = new Subject();
 
     constructor(
         private router: Router,
@@ -33,6 +36,7 @@ export class InfoComponent implements OnInit {
         if (typeof event.password !== 'undefined' && (event.password || '').length) {
             this.transactionService
                 .getTransactionDetailedInfo(event)
+                .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(
                     (responseContent: OtpResponseInterface) => {
                         console.log(responseContent);
@@ -47,6 +51,7 @@ export class InfoComponent implements OnInit {
 
         this.transactionService
             .getTransaction(event)
+            .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
                 (responseContent: OtpResponseInterface) => {
                     console.log(responseContent);
@@ -59,6 +64,11 @@ export class InfoComponent implements OnInit {
     }
 
     goBack() {
-        this.router.navigate([TransactionSubmitUrls.TRANSACTION_HOME]);
+        this.router.navigate([TransactionSubmitUrls.HOME]);
+    }
+    
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }

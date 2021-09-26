@@ -1,5 +1,5 @@
 export class TransactionSubmitUrls {
-    public static TRANSACTION_HOME = '/transaction-submit';
+    public static HOME = '/transaction-submit';
     public static REGISTRATION = '/registration';
     public static CONFIRMATION = '/confirmation';
     public static RESET = '/reset';

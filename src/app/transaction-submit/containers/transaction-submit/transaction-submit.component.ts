@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { TransactionSubmitUrls } from "../../transaction-submit-urls.component";
+import { AppUrls } from "src/app/app-urls.component";
 
 @Component({
     selector: 'transaction-submit',
@@ -15,11 +16,11 @@ export class TransactionSubmitComponent {
     ) {}
 
     goToCreateTransaction() {
-        this.router.navigate(['/transaction-submit/registration']);
+        this.router.navigate([TransactionSubmitUrls.HOME + TransactionSubmitUrls.REGISTRATION]);
     }
 
     goToTransactionInfo() {
-        this.router.navigate([TransactionSubmitUrls.TRANSACTION_HOME + TransactionSubmitUrls.TRANSACTION_INFO]);
+        this.router.navigate([TransactionSubmitUrls.HOME + TransactionSubmitUrls.TRANSACTION_INFO]);
     }
 
     // handleView(event: TransactionInterface) {
@@ -27,6 +28,6 @@ export class TransactionSubmitComponent {
     // }
 
     goBack() {
-        this.router.navigate(['/transactions']);
+        this.router.navigate([AppUrls.TRANSACTIONS_HOME]);
     }
 }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionInfoInterface } from "../../models/transaction-info.interface";
 import { OtpResponseInterface } from "../../models/otp-response.interface";
@@ -11,9 +13,10 @@ import { OtpResponseInterface } from "../../models/otp-response.interface";
 })
 
 
-export class InfoByIdComponent implements OnInit {
+export class InfoByIdComponent implements OnInit, OnDestroy {
     infoError: string;
     response: OtpResponseInterface | null;
+    private ngUnsubscribe = new Subject();
 
     constructor(
         private router: Router,
@@ -31,6 +34,7 @@ export class InfoByIdComponent implements OnInit {
     setInfo() {
         this.transactionService
             .getTransactionByUrlTransactionId()
+            .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
                 (responseContent: OtpResponseInterface) => {
                     console.log(responseContent);
@@ -44,5 +48,10 @@ export class InfoByIdComponent implements OnInit {
 
     goBack() {
         this.router.navigate(['/transactions']);
+    }
+    
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }

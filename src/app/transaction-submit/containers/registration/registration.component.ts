@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 import { TransactionSubmitService } from "../../transaction-submit.service";
 import { TransactionRegistrationInterface } from "../../models/transaction-registration.interface";
 import { CountryInterface } from "src/assets/nomenclatures/models/country.interface";
@@ -12,10 +14,11 @@ import { TransactionSubmitUrls } from "../../transaction-submit-urls.component";
     templateUrl: './registration.component.html'
 })
 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
     registration: TransactionRegistrationInterface;
     registrationError: string;
     countries: Array<CountryInterface>;
+    private ngUnsubscribe = new Subject();
 
     constructor(
         private router: Router,
@@ -33,9 +36,10 @@ export class RegistrationComponent implements OnInit {
     onRegistration(event: TransactionRegistrationInterface) {
         this.transactionService
             .registration(event)
+            .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
                 (responseContent: OtpResponseInterface) => {
-                    this.router.navigate([TransactionSubmitUrls.CONFIRMATION+'/'+(responseContent.response.transactionId || '')]);
+                    this.router.navigate([TransactionSubmitUrls.HOME+TransactionSubmitUrls.CONFIRMATION+'/'+(responseContent.response.transactionId || '')]);
                     //this.transaction = Object.assign({}, this.transaction, data);
                 },
                 (error) => {
@@ -46,5 +50,10 @@ export class RegistrationComponent implements OnInit {
 
     goBack() {
         this.router.navigate(['/transactions']);
+    }
+    
+    ngOnDestroy() {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }
