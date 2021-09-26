@@ -7,18 +7,20 @@ import { TransactionInfoInterface } from "../../models/transaction-info.interfac
 import { OtpResponseInterface } from "../../models/otp-response.interface";
 import { TransactionSubmitUrls } from "../../transaction-submit-urls.component";
 
+const TRANSACTION_STATUS_AWAITING_REQUEST = 'awaiting_request';
+
 @Component({
     selector: 'info',
     styleUrls: [],
     templateUrl: './info.component.html'
 })
 
-
 export class InfoComponent implements OnInit, OnDestroy {
     transactionInfo: TransactionInfoInterface;
     infoError: string;
     response: OtpResponseInterface | null;
     private ngUnsubscribe = new Subject();
+    showConfirmationLink: boolean = false;
 
     constructor(
         private router: Router,
@@ -30,6 +32,7 @@ export class InfoComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.infoError = '';
         this.response = null;
+        this.showConfirmationLink = false;
     }
 
     onGetInfo(event: TransactionInfoInterface) {
@@ -39,8 +42,8 @@ export class InfoComponent implements OnInit, OnDestroy {
                 .pipe(takeUntil(this.ngUnsubscribe))
                 .subscribe(
                     (responseContent: OtpResponseInterface) => {
-                        console.log(responseContent);
                         this.response = responseContent;
+                        this.showConfirmationLink = (this.response?.response?.transactionStatus || '') === TRANSACTION_STATUS_AWAITING_REQUEST ? true : false;
                     },
                     (error) => {
                       this.infoError = error?.error?.arguments.errors || (JSON.stringify(error || 'UNKNOWN ERROR'));
@@ -54,8 +57,8 @@ export class InfoComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
                 (responseContent: OtpResponseInterface) => {
-                    console.log(responseContent);
                     this.response = responseContent;
+                    this.showConfirmationLink = (this.response?.response?.transactionStatus || '') === TRANSACTION_STATUS_AWAITING_REQUEST ? true : false;
                 },
                 (error) => {
                   this.infoError = error?.error?.arguments.errors || (JSON.stringify(error || 'UNKNOWN ERROR'));
@@ -65,6 +68,10 @@ export class InfoComponent implements OnInit, OnDestroy {
 
     goBack() {
         this.router.navigate([TransactionSubmitUrls.HOME]);
+    }
+
+    goToConfirmation() {
+        this.router.navigate([TransactionSubmitUrls.HOME + TransactionSubmitUrls.CONFIRMATION + '/' + this.response?.response?.transactionId || '']);
     }
     
     ngOnDestroy() {

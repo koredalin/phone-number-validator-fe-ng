@@ -29,4 +29,12 @@
 
     </info-viewer>
 
+    <span *ngIf="showConfirmationLink">
+        <button
+            class="btn btn-outline-info ml-3"
+            (click)="goToConfirmation()">
+            &lsaquo; Confirm the transaction
+        </button>
+    </span>
+
 </div>
